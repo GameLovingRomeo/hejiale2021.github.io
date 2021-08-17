@@ -14,8 +14,12 @@
 <meta property="og:site_name" content="罗密欧与猪上树">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/1.png">
+<meta property="og:image" content="http://example.com/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/2.png">
+<meta property="og:image" content="http://example.com/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/3.png">
+<meta property="og:image" content="http://example.com/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/4.png">
+<meta property="og:image" content="http://example.com/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/5.png">
 <meta property="article:published_time" content="2021-08-13T09:34:51.000Z">
-<meta property="article:modified_time" content="2021-08-13T11:03:15.210Z">
+<meta property="article:modified_time" content="2021-08-16T10:40:05.845Z">
 <meta property="article:author" content="H&amp;J&amp;L">
 <meta property="article:tag" content="系统学习页">
 <meta name="twitter:card" content="summary">
@@ -24,7 +28,7 @@
     <link rel="alternative" href="/atom.xml" title="罗密欧与猪上树" type="application/atom+xml">
   
   
-    <link rel="icon" href="/img/2.jpg">
+    <link rel="icon" href="/img/1.jpg">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -58,7 +62,7 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/">主页</a></li>
+				<li><a href="/tags/%E4%B8%BB%E9%A1%B5">主页</a></li>
 	        
 				<li><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
 	        
@@ -138,7 +142,7 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/tags/%E4%B8%BB%E9%A1%B5">主页</a></li>
 		        
 					<li style="width: 25%"><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
 		        
@@ -182,8 +186,49 @@
         <meta name="referrer" content="no-referrer">
 <span id="more"></span>
 
-<h2 id="递归-Recursion"><a href="#递归-Recursion" class="headerlink" title="递归(Recursion)"></a>递归(Recursion)</h2><p>简单的理解就是递归方法自己调用自己，每次调用传入不同的变量，有助于解决复杂问题，是代码整洁。当然也有弊端，维护较为麻烦<br><img src="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/1.png" alt="代码"></p>
+<h1 id="递归-Recursion"><a href="#递归-Recursion" class="headerlink" title="递归(Recursion)"></a>递归(Recursion)</h1><h3 id="简单的理解："><a href="#简单的理解：" class="headerlink" title="简单的理解："></a>简单的理解：</h3><font size="4" face="宋体">
+<div class="ss">&emsp;&emsp;<b>就是递归方法自己调用自己，每次调用传入不同的变量，有助于解决复杂问题，是代码整洁。当然也有弊端，维护较为麻烦</b></div>
+</font>
 
+<h4 id="先通过两个简单的事例了解"><a href="#先通过两个简单的事例了解" class="headerlink" title="先通过两个简单的事例了解"></a>先通过两个简单的事例了解</h4><font color="red" size="5">
+打印问题 
+</font>
+
+<p><img src="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/1.png"><br>具体分析<br><img src="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/2.png"> </p>
+<font size="4" face="宋体">
+<div id="c" class="ss">&emsp;&emsp;<b>每次方法递归调用都会产生一个栈帧，然后进入判断是否>2,true就进入递归调用，直到n不在大于2，也就是递归结束条件，走sout打印所以控制台第一个打印的就是栈顶的n = 2 时，执行结束从栈中弹出继续执行下面的打印语句，执行到main完毕后，栈为空，最终看到输出结果如上图的idea的控制台打印。</b></div>
+</font>
+
+<p>当我对其进行部分改变，如下图</p>
+<p><img src="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/3.png"></p>
+<font size="4" face="宋体">
+<div class="ss">&emsp;&emsp;<b>将语句的打印放在else分支中，在考虑控制台打印
+显然当走if内语句，就不会在走else语句中，所以控制打印的只有n=2</b></div>
+</font>
+
+
+<p><img src="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/4.png"></p>
+<font color="red" size="5" face="宋体">
+阶乘问题 
+</font>
+<h3>下面的fff()方法
+
+<p><img src="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/5.png"></p>
+<font size="4" face="宋体">
+如果i = 1，那么返回就为1<br>
+i = 2,  return  fff(1) * 2<br>
+i = 3,  retrrn  fff(2) * 3 // fff(1) * 2 * 3<br>
+以此类推。
+</font>
+
+
+<style type="text/css">
+  .ss{
+      margin-left: 40px;
+  }
+</style>
+
+</h3>
       
 
       
@@ -266,8 +311,17 @@
   
 <nav id="article-nav">
   
+    <a href="/2021/08/13/my/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          my
+        
+      </div>
+    </a>
   
-    <a href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F1/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">数据结构-后缀表达式</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -295,7 +349,27 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92-Recursion"><span class="toc-number">1.</span> <span class="toc-text">递归(Recursion)</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%92%E5%BD%92-Recursion"><span class="toc-number">1.</span> <span class="toc-text">递归(Recursion)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">简单的理解：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E9%80%9A%E8%BF%87%E4%B8%A4%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%BA%8B%E4%BE%8B%E4%BA%86%E8%A7%A3"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">先通过两个简单的事例了解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.2.</span> <span class="toc-text">下面的fff()方法
+
+
+
+如果i &#x3D; 1，那么返回就为1
+
+i &#x3D; 2,  return  fff(1) * 2
+
+i &#x3D; 3,  retrrn  fff(2) * 3 &#x2F;&#x2F; fff(1) * 2 * 3
+
+以此类推。
+
+
+
+
+  .ss{
+      margin-left: 40px;
+  }
+
+
+</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -412,6 +486,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">系统学习页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">主页</a>
               </li>
             
             <div class="clearfix"></div>
