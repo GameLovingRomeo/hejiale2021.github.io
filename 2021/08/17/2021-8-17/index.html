@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程， 写出自己的理解 | 罗密欧与猪上树</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="（必做）有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程，  写出自己的理解  分析 在加载book时，链接时会分配空间以及设置默认值book对象就 &#x3D; null ，amount &#x3D; 0；然后开始进入初始化阶段，jvm会先初始化入口函数的主&gt;类，book类会被初始化，javac会把显示的初始赋值语句和静态代码块合并到一起，然后jvm先执&gt;行类构造器（静态代码块">
+  <meta name="description" content="（必做）有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程，  写出自己的理解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程， 写出自己的理解">
 <meta property="og:url" content="http://example.com/2021/08/17/2021-8-17/index.html">
 <meta property="og:site_name" content="罗密欧与猪上树">
-<meta property="og:description" content="（必做）有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程，  写出自己的理解  分析 在加载book时，链接时会分配空间以及设置默认值book对象就 &#x3D; null ，amount &#x3D; 0；然后开始进入初始化阶段，jvm会先初始化入口函数的主&gt;类，book类会被初始化，javac会把显示的初始赋值语句和静态代码块合并到一起，然后jvm先执&gt;行类构造器（静态代码块">
+<meta property="og:description" content="（必做）有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程，  写出自己的理解">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-17T04:06:43.000Z">
-<meta property="article:modified_time" content="2021-08-17T06:27:40.957Z">
+<meta property="article:modified_time" content="2021-08-18T09:30:34.108Z">
 <meta property="article:author" content="H&amp;J&amp;L">
 <meta property="article:tag" content="日常页">
 <meta name="twitter:card" content="summary">
@@ -63,6 +63,8 @@
 				<li><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
 	        
 				<li><a href="/tags/%E6%97%A5%E5%B8%B8%E9%A1%B5">日常页</a></li>
+	        
+				<li><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></li>
 	        
 				<li><a href="/archives/index.html">归档</a></li>
 	        
@@ -122,6 +124,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -138,13 +142,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/tags/%E4%B8%BB%E9%A1%B5">主页</a></li>
+					<li style="width: 20%"><a href="/tags/%E4%B8%BB%E9%A1%B5">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
+					<li style="width: 20%"><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/%E6%97%A5%E5%B8%B8%E9%A1%B5">日常页</a></li>
+					<li style="width: 20%"><a href="/tags/%E6%97%A5%E5%B8%B8%E9%A1%B5">日常页</a></li>
 		        
-					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 20%"><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></li>
+		        
+					<li style="width: 20%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -182,6 +188,7 @@
         <blockquote>
 <p>（必做）有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程，  写出自己的理解</p>
 </blockquote>
+<span id="more"></span>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><blockquote>
 <p>在加载book时，链接时会分配空间以及设置默认值<br>book对象就 = null ，amount = 0；然后开始进入初始化阶段，jvm会先初始化入口函数的主&gt;类，book类会被初始化，javac会把显示的初始赋值语句和静态代码块合并到一起，然后jvm先执&gt;行类构造器（静态代码块和显示的初始赋值语句），所以static Book book = new Book();&gt;static int amount = 112;<br>       static {<br>           System.out.println(“书的静态代码块”);<br>           System.out.println(“amount=” + amount);<br>       }会先执行，第一句static Book book = new Book();开始对book实例化，执行对想的构造器，也就是这一堆int price = 110;{<br>           System.out.println(“书的普通代码块”);<br>       }<br>       Book() {<br>           System.out.println(“书的构造方法”);<br>           System.out.println(“price=” + price + “,amount=” + amount);<br>       }，所以控制台就先输出了 1.书的普通代码块2.书的构造方法 3.price=” + price + “,amount=” + amount ，此时只有price被初始化赋值为110，现在的amount还是链接给的默认值0，它目前还没被初始化；</p>
 </blockquote>
@@ -301,14 +308,14 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          线程安全的单例模式
+          单例模式
         
       </div>
     </a>
   
   
     <a href="/2021/08/16/2021-8-16/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2021.8.16</div>
+      <div class="article-nav-title">2021-8-16javase</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -456,6 +463,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">主页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>

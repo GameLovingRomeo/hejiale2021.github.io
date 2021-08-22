@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>线程安全的单例模式 | 罗密欧与猪上树</title>
+  <title>单例模式 | 罗密欧与猪上树</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）  《一》 饿汉式     public class Singleton &amp;#123;        &#x2F;&#x2F; 缺点，类一加载就会new 一个静态对象，如果项目里有许多这种类，启动会变慢，        private static Singleton instance &#x3D; new Singleton();    &#x2F;&#x2F;&#x2F;直接初始化">
+  <meta name="description" content="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程安全的单例模式">
+<meta property="og:title" content="单例模式">
 <meta property="og:url" content="http://example.com/2021/08/17/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="罗密欧与猪上树">
-<meta property="og:description" content="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）  《一》 饿汉式     public class Singleton &amp;#123;        &#x2F;&#x2F; 缺点，类一加载就会new 一个静态对象，如果项目里有许多这种类，启动会变慢，        private static Singleton instance &#x3D; new Singleton();    &#x2F;&#x2F;&#x2F;直接初始化">
+<meta property="og:description" content="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-17T06:14:14.000Z">
-<meta property="article:modified_time" content="2021-08-17T06:16:53.969Z">
+<meta property="article:modified_time" content="2021-08-22T02:39:42.701Z">
 <meta property="article:author" content="H&amp;J&amp;L">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="罗密欧与猪上树" type="application/atom+xml">
@@ -62,6 +63,8 @@
 				<li><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
 	        
 				<li><a href="/tags/%E6%97%A5%E5%B8%B8%E9%A1%B5">日常页</a></li>
+	        
+				<li><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></li>
 	        
 				<li><a href="/archives/index.html">归档</a></li>
 	        
@@ -121,6 +124,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -137,13 +142,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/tags/%E4%B8%BB%E9%A1%B5">主页</a></li>
+					<li style="width: 20%"><a href="/tags/%E4%B8%BB%E9%A1%B5">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
+					<li style="width: 20%"><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/%E6%97%A5%E5%B8%B8%E9%A1%B5">日常页</a></li>
+					<li style="width: 20%"><a href="/tags/%E6%97%A5%E5%B8%B8%E9%A1%B5">日常页</a></li>
 		        
-					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 20%"><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></li>
+		        
+					<li style="width: 20%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -165,7 +172,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      线程安全的单例模式
+      单例模式
     </h1>
   
 
@@ -178,63 +185,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"><a href="#请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）" class="headerlink" title="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"></a>请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）</h2><p>  《一》 饿汉式</p>
-<pre><code class="java">
-   public class Singleton &#123;
-       // 缺点，类一加载就会new 一个静态对象，如果项目里有许多这种类，启动会变慢，
-       private static Singleton instance = new Singleton();    ///直接初始化一个实例对象
-       private Singleton() &#123;    ///private类型的构造函数，保证其他类对象不能直接new一个该对象的实例
-       &#125;
-       public static Singleton getInstance() &#123;    ///该类唯一的一个public方法
-           return instance;
-       &#125;
-   &#125;
-</code></pre>
-<p> 《二》 懒汉式</p>
-<pre><code class="java">
-    class singletonLazy &#123;
-        private volatile static singletonLazy instance; // volatile 保证可见性，不保证一致性，防止指令重排
-        // 私有的无参构造
-        private singletonLazy() &#123;
-        &#125;
-        public static singletonLazy getInstance()&#123;
-            if (instance == null)&#123;
-                synchronized (singletonLazy.class)&#123;
-                    if (instance == null)&#123;
-                        instance =  new singletonLazy();
-                    &#125;
-                &#125;
-            &#125;
-            return instance;
-        &#125;
-    // 在第一次创建时需要同步，以后就不需要同步了，加快运行速度
-    &#125;
-</code></pre>
-<p>《三》 静态内部类</p>
-<pre><code class="java">
-// 静态内部类的好处是可以在调用的时候再加载实例，避免资源浪费，同时线程安全。
+        <h2 id="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"><a href="#请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）" class="headerlink" title="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"></a>请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）</h2><span id="more"></span>
 
-    class StaticInnerSingleton &#123;
-        // 静态内部类
-        private static class InstanceHolder &#123;
-            // 设置一个静态属性 指向一个 类的实例对象
-            private static StaticInnerSingleton instance = new StaticInnerSingleton();
-        &#125;
-        private StaticInnerSingleton() &#123;
-        &#125;
-        public static StaticInnerSingleton getInstance() &#123;
-            return InstanceHolder.instance;
-        &#125;
-    &#125;
-</code></pre>
-<p>《四》 枚举<br>最简单，但是实用性不强<br>枚举类是天生线程安全的</p>
-<pre><code class="java">
-    enum EnumSingleton &#123;
-        INSTANCE;
-    &#125;
-</code></pre>
-<p>上面条件都是基于不使用反射获取对象，且除了枚举用反射创建会直接抛异常</p>
-
+<p>  《一》 饿汉式</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 缺点，类一加载就会new 一个静态对象，如果项目里有许多这种类，启动会变慢，</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();    <span class="comment">///直接初始化一个实例对象</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;    <span class="comment">///private类型的构造函数，保证其他类对象不能直接new一个该对象的实例</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;    <span class="comment">///该类唯一的一个public方法</span></span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line"> 《二》 双重锁校验式（懒汉式）</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">singletonLazy</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> singletonLazy instance; <span class="comment">// volatile 保证可见性，不保证一致性，防止指令重排</span></span><br><span class="line">        <span class="comment">// 私有的无参构造</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">singletonLazy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> singletonLazy <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (singletonLazy.class)&#123;</span><br><span class="line">                    <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                        instance =  <span class="keyword">new</span> singletonLazy();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">// 在第一次创建时需要同步，以后就不需要同步了，加快运行速度</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line">《三》 静态内部类</span><br><span class="line">```java</span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态内部类的好处是可以在调用的时候再加载实例，避免资源浪费，同时线程安全。</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">StaticInnerSingleton</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 静态内部类</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceHolder</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 设置一个静态属性 指向一个 类的实例对象</span></span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">static</span> StaticInnerSingleton instance = <span class="keyword">new</span> StaticInnerSingleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">StaticInnerSingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StaticInnerSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> InstanceHolder.instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line">《四》 枚举</span><br><span class="line">```java</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 最简单，但是实用性不强</span></span><br><span class="line">    <span class="comment">// 枚举类是天生线程安全的</span></span><br><span class="line">        <span class="class"><span class="keyword">enum</span> <span class="title">EnumSingleton</span> </span>&#123;</span><br><span class="line">            INSTANCE;</span><br><span class="line">        &#125;</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line">上面条件都是基于不使用反射获取对象的安全的单例模式，且枚举用反射创建会直接抛异常、</span><br><span class="line">### 单例设计模式不安全的</span><br><span class="line">《五》</span><br><span class="line">```java</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AtomicReferenceSingleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> AtomicReference&lt;AtomicReferenceSingleton&gt; INSTANCE_HOLDER = <span class="keyword">new</span> AtomicReference&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">AtomicReferenceSingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AtomicReferenceSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (; ; ) &#123;</span><br><span class="line">            AtomicReferenceSingleton instance = INSTANCE_HOLDER.get();</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> != instance) <span class="keyword">return</span> instance;</span><br><span class="line">            INSTANCE_HOLDER.compareAndSet(<span class="keyword">null</span>, <span class="keyword">new</span> AtomicReferenceSingleton());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>《六》</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 懒汉式</span></span><br><span class="line"><span class="comment">// 类锁保证线程安全</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LazySingleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> LazySingleton instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">LazySingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态方法锁，锁住整个方法，效率比较低</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> LazySingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> LazySingleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -242,6 +198,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -465,6 +432,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">主页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>

@@ -59,6 +59,8 @@
 	        
 				<li><a href="/tags/%E6%97%A5%E5%B8%B8%E9%A1%B5">日常页</a></li>
 	        
+				<li><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></li>
+	        
 				<li><a href="/archives/index.html">归档</a></li>
 	        
 			</ul>
@@ -117,6 +119,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -133,13 +137,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/tags/%E4%B8%BB%E9%A1%B5">主页</a></li>
+					<li style="width: 20%"><a href="/tags/%E4%B8%BB%E9%A1%B5">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
+					<li style="width: 20%"><a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E9%A1%B5">系统学习页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/%E6%97%A5%E5%B8%B8%E9%A1%B5">日常页</a></li>
+					<li style="width: 20%"><a href="/tags/%E6%97%A5%E5%B8%B8%E9%A1%B5">日常页</a></li>
 		        
-					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 20%"><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></li>
+		        
+					<li style="width: 20%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -155,6 +161,555 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-线程安全的单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/17/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/17/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2021-08-17T06:14:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"><a href="#请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）" class="headerlink" title="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"></a>请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）</h2>
+        
+          <a class="article-more-a" href="/2021/08/17/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/17/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2021-8-17" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/17/2021-8-17/">有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程， 写出自己的理解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/17/2021-8-17/" class="archive-article-date">
+  	<time datetime="2021-08-17T04:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>（必做）有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程，  写出自己的理解</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2021/08/17/2021-8-17/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/17/2021-8-17/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2021-8-16" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/16/2021-8-16/">2021-8-16javase</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/16/2021-8-16/" class="archive-article-date">
+  	<time datetime="2021-08-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="2021-8-16"><a href="#2021-8-16" class="headerlink" title="2021-8-16"></a>2021-8-16</h3><blockquote>
+<p>《一》<br>1.请问：java String a = “12” + “34” + new String(“12”) + “1234” ; 创建了几个字符串&gt; 对象？请试着从原理的层次分析一下为什么；</p>
+<p>2.short s1 = 1; s1 = s1 + 1;会正确运行吗? short s1 = 1; s1 += 1;会正确运行吗？请问&gt;为什么会出现这样的结果？</p>
+<p>3.double a = 1d - 0.9d; double b = 0.9d - 0.8d; 请问 a == b 成立吗？为什么？在&gt;Java中涉及到这样的精确计算应该怎么办？</p>
+<p>4.快速排序算法，例如：给你 [10,4,2,7,5,19,11,33,28] 这样的数组，对它进行快速排序，然&gt;后按照从小到大顺序排列输出新的数组。要求写出完整的可运行的代码，贴在答案里面。（有点&gt;难，作为扩展题，不强制要求）<br></p></blockquote>
+        
+          <a class="article-more-a" href="/2021/08/16/2021-8-16/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/16/2021-8-16/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-八皇后问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/15/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/">八皇后问题</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/15/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2021-08-15T09:40:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="八皇后问题简述，-n-n棋盘上，每一行只能放一个，每一列只能放一个，每个对角斜线只能放一个"><a href="#八皇后问题简述，-n-n棋盘上，每一行只能放一个，每一列只能放一个，每个对角斜线只能放一个" class="headerlink" title="八皇后问题简述， n * n棋盘上，每一行只能放一个，每一列只能放一个，每个对角斜线只能放一个"></a>八皇后问题简述， n * n棋盘上，每一行只能放一个，每一列只能放一个，每个对角斜线只能放一个</h3><h3 id="思路分析：往第一排第一个放，然后，开始第二排，一次判断是否能放，知道可以放，然后往下一排继续，知道8个放完，然后回溯到上一个栈帧，继续从第一排的第二个，开始。。。"><a href="#思路分析：往第一排第一个放，然后，开始第二排，一次判断是否能放，知道可以放，然后往下一排继续，知道8个放完，然后回溯到上一个栈帧，继续从第一排的第二个，开始。。。" class="headerlink" title="思路分析：往第一排第一个放，然后，开始第二排，一次判断是否能放，知道可以放，然后往下一排继续，知道8个放完，然后回溯到上一个栈帧，继续从第一排的第二个，开始。。。"></a>思路分析：往第一排第一个放，然后，开始第二排，一次判断是否能放，知道可以放，然后往下一排继续，知道8个放完，然后回溯到上一个栈帧，继续从第一排的第二个，开始。。。</h3>
+        
+          <a class="article-more-a" href="/2021/08/15/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/15/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2021-8-15javase" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/15/2021-8-15javase/">2021.8.15javase</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/15/2021-8-15javase/" class="archive-article-date">
+  	<time datetime="2021-08-15T07:55:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h3><p> 《一》2021-08-15</p>
+<blockquote>
+<p>列举java所有的基本数据类型、字节数和取值范围；</p>
+<p> 整型int ：占4个字节，取值范围-2,147,483,648 - 2,147,483,647</p>
+<p>字节型byte：占一个字节  范围 0 - 255</p>
+<p>短整型short：占2个字节 范围：-32,768 - 32767 </p>
+<p>长整型long： 占8个字节 范围：-9223372036854775808-9223372036854775807</p>
+<p> 布尔类型 boolean: 占1个字节  true flase</p>
+<p>字符型char：占16个字节 范围\u0000 ~ \uffff</p>
+<p>单精度浮点型float： 占4个字节 </p>
+<p> 双精度浮点型：double 占8个字节</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2021/08/15/2021-8-15javase/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/15/2021-8-15javase/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-IO的一个小demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/15/IO%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8Fdemo/">IO的一个小demo(序列化)</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/15/IO%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8Fdemo/" class="archive-article-date">
+  	<time datetime="2021-08-15T07:13:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="对象读写：请自己设计一个类，实现序列化接口，将类的对象写入文件中，然后再从文件读出来，打印对象信息（请贴上自己的代码）"><a href="#对象读写：请自己设计一个类，实现序列化接口，将类的对象写入文件中，然后再从文件读出来，打印对象信息（请贴上自己的代码）" class="headerlink" title="对象读写：请自己设计一个类，实现序列化接口，将类的对象写入文件中，然后再从文件读出来，打印对象信息（请贴上自己的代码）"></a>对象读写：请自己设计一个类，实现序列化接口，将类的对象写入文件中，然后再从文件读出来，打印对象信息（请贴上自己的代码）</h3>
+        
+          <a class="article-more-a" href="/2021/08/15/IO%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8Fdemo/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/15/IO%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8Fdemo/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-线程等待" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/15/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85/">七种线程等待(如何让主线程等待t1执行完之后再开始执行自己的代码)</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/15/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85/" class="archive-article-date">
+  	<time datetime="2021-08-15T06:42:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="有主线程mainThread和一个工作线程t1，问：如何让主线程等待t1执行完之后再开始执行自己的代码？提示：除了join-之外至少还有3种以上的方法"><a href="#有主线程mainThread和一个工作线程t1，问：如何让主线程等待t1执行完之后再开始执行自己的代码？提示：除了join-之外至少还有3种以上的方法" class="headerlink" title="有主线程mainThread和一个工作线程t1，问：如何让主线程等待t1执行完之后再开始执行自己的代码？提示：除了join()之外至少还有3种以上的方法"></a>有主线程mainThread和一个工作线程t1，问：如何让主线程等待t1执行完之后再开始执行自己的代码？提示：除了join()之外至少还有3种以上的方法</h2>
+        
+          <a class="article-more-a" href="/2021/08/15/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/15/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-递归的迷宫回溯问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -408,551 +963,9 @@
 
 
   
-    <article id="post-递归的应用场景" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">递归的应用场景</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" class="archive-article-date">
-  	<time datetime="2021-08-13T09:34:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <meta name="referrer" content="no-referrer">
-        
-          <a class="article-more-a" href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-字符串计算式转后缀表达式的字符串list形式1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F1/">数据结构-后缀表达式</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F1/" class="archive-article-date">
-  	<time datetime="2021-08-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <span id="more"></span>
-
-<h2 id="后缀表达式"><a href="#后缀表达式" class="headerlink" title="后缀表达式"></a>后缀表达式</h2><h4 id="简单的字符串计算式，转化为后缀表达式的list形式"><a href="#简单的字符串计算式，转化为后缀表达式的list形式" class="headerlink" title="简单的字符串计算式，转化为后缀表达式的list形式"></a>简单的字符串计算式，转化为后缀表达式的list形式</h4><hr>
-<pre><code>思路： 需要一个符号栈s1 ，
-          一个数字栈 s2     
- 从左往右检索  数字直接加入 s2
-               操作符的话先看优先级
-                  1.如果s1 为空，或者是左括号， 那么直接加入s1
-                   2.不为空，若优先级比栈顶元素优先级高，直接加入s1
-                       否则就将s1栈顶弹出加入到s2 ，然后继续跟下面的比较
-                   3.如果是括号， 左括号直接加入s1，右括号，就把所有的s1弹出加到s2，直到遇见左括号停止
-                   并将括号废弃
-              重复，直到i到达list的最后边结束，
-              将s1的剩余弹出到s2中，
-              返回 s2的逆序就是 中缀表达式的后缀表达式
-</code></pre>
-<p> main方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  String s = <span class="string">&quot;1+((2+3)*4)-5&quot;</span>;</span><br><span class="line">  List&lt;String&gt; arrayList = toInfixList(s); <span class="comment">// 先将一个 s 的字符串表达式转化为 一个list，便于检索</span></span><br><span class="line">    System.out.println(arrayList);</span><br><span class="line">    List&lt;String&gt; list = toArrSuffix(arrayList); <span class="comment">// 将list 转化为一个 后缀表达式的 字符串数组</span></span><br><span class="line">    System.out.println(list);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>```java<br>    // 将一个计算式list 转化为后缀表达式的list</p>
-<p>public static List<String> toArrSuffix(List<String> list){</String></String></p>
-<pre><code>// 初始化两个栈
-Stack&lt;String&gt; s1 = new Stack&lt;&gt;();
-List&lt;String&gt; s2 = new ArrayList&lt;&gt;(); // 由于s2 并未涉及到栈的pop，所以化简将栈替换为list
-for (String s : list) &#123;
-    // 如果是
-    if (s.matches(&quot;\\d+&quot;))&#123;
-        s2.add(s);
-    &#125;else if (s.equals(&quot;(&quot;))&#123;
-        s1.push(s);
-    &#125;else if (s.equals(&quot;)&quot;))&#123;
-        while(!s1.peek().equals(&quot;(&quot;))&#123;
-            s2.add(s1.pop());
-        &#125;
-        s1.pop(); // 弹出s1的（
-    &#125;else &#123;
-        while(s1.size() !=0 &amp;&amp; Operation.orderPlus(s1.peek())&gt;= Operation.orderPlus(s) )&#123;
-            s2.add(s1.pop());
-        &#125;
-        s1.push(s);
-    &#125;
-&#125;
-while(s1.size() !=0)&#123;
-    s2.add(s1.pop());
-&#125;
-return s2;
-</code></pre>
-<p>}</p>
-<p>// 判断优先级</p>
-<p>static class Operation{</p>
-<pre><code>private static int add = 1;
-private static int sub = 1;
-private static int mul = 2;
-private static int div = 2;
-public static int orderPlus(String mark) &#123;
-
-    int result = 0;
-    switch (mark) &#123;
-        case &quot;+&quot;:
-            result = add;
-            break;
-        case &quot;-&quot;:
-            result = sub;
-            break;
-        case &quot;*&quot;:
-            result = mul;
-            break;
-        case &quot;/&quot;:
-            result = div;
-            break;
-        default:
-            System.out.println(&quot;未见此操作符&quot;);
-            break;
-    &#125;
-    return result;
-&#125;
-</code></pre>
-<p>}</p>
-<p>// 将一个计算式的字符串转为一个list</p>
-<p>public static List<String> toInfixList(String suffix) {</String></p>
-<pre><code>List&lt;String&gt; list = new ArrayList&lt;&gt;();
-int i = 0;
-char c = &#39; &#39;;
-String str = &quot;&quot;;
-do &#123;
-    if ((c = suffix.charAt(i)) &lt; 48 || (c = suffix.charAt(i)) &gt; 57) &#123;
-        // 说明当前是字符
-        list.add(String.valueOf(c));
-        i++;
-    &#125; else &#123;
-        // 说明当前是个数字
-        while (i &lt; suffix.length() &amp;&amp; (c = suffix.charAt(i)) &gt;= 48 &amp;&amp; (c = suffix.charAt(i)) &lt;= 57) &#123;
-            str += c;
-            i++;
-        &#125;
-        list.add(str);
-        // 置空
-        str = &quot;&quot;;
-    &#125;
-&#125; while (i &lt; suffix.length());
-return list;
-</code></pre>
-<p>}```</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Frist" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/12/Frist/">Frist</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/12/Frist/" class="archive-article-date">
-  	<time datetime="2021-08-12T07:52:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="study-FORK"><a href="#study-FORK" class="headerlink" title="study FORK"></a>study FORK</h2><h3 id="关于字符串的拼接"><a href="#关于字符串的拼接" class="headerlink" title="关于字符串的拼接"></a>关于字符串的拼接</h3><p>1 .String a = “1”;<br> 2.String b = “12”;<br> 3.String c = “1” + “2”;<br> 4.String d = a + “2”;<br> 5. String e = new String(“12”);<br>请问：b == c，b == d，b == e，b.equals(e)，这几次比较分别返回什么结果？请试着分析原因。</p>
-        
-          <a class="article-more-a" href="/2021/08/12/Frist/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/12/Frist/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-second" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/12/second/">线程安全的单例设计模式</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/12/second/" class="archive-article-date">
-  	<time datetime="2021-08-12T07:52:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"><a href="#请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）" class="headerlink" title="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"></a>请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）</h2><p>  《一》 饿汉式</p>
-<pre><code class="java">
-   public class Singleton &#123;
-       // 缺点，类一加载就会new 一个静态对象，如果项目里有许多这种类，启动会变慢，
-       private static Singleton instance = new Singleton();    ///直接初始化一个实例对象
-       private Singleton() &#123;    ///private类型的构造函数，保证其他类对象不能直接new一个该对象的实例
-       &#125;
-       public static Singleton getInstance() &#123;    ///该类唯一的一个public方法
-           return instance;
-       &#125;
-   &#125;
-</code></pre>
-<p> 《二》 懒汉式</p>
-<pre><code class="java">
-    class singletonLazy &#123;
-        private volatile static singletonLazy instance; // volatile 保证可见性，不保证一致性，防止指令重排
-        // 私有的无参构造
-        private singletonLazy() &#123;
-        &#125;
-        public static singletonLazy getInstance()&#123;
-            if (instance == null)&#123;
-                synchronized (singletonLazy.class)&#123;
-                    if (instance == null)&#123;
-                        instance =  new singletonLazy();
-                    &#125;
-                &#125;
-            &#125;
-            return instance;
-        &#125;
-    // 在第一次创建时需要同步，以后就不需要同步了，加快运行速度
-    &#125;
-</code></pre>
-<p>《三》 静态内部类</p>
-<pre><code class="java">
-// 静态内部类的好处是可以在调用的时候再加载实例，避免资源浪费，同时线程安全。
-
-    class StaticInnerSingleton &#123;
-        // 静态内部类
-        private static class InstanceHolder &#123;
-            // 设置一个静态属性 指向一个 类的实例对象
-            private static StaticInnerSingleton instance = new StaticInnerSingleton();
-        &#125;
-        private StaticInnerSingleton() &#123;
-        &#125;
-        public static StaticInnerSingleton getInstance() &#123;
-            return InstanceHolder.instance;
-        &#125;
-    &#125;
-</code></pre>
-<p>《四》 枚举<br>最简单，但是实用性不强<br>枚举类是天生线程安全的</p>
-<pre><code class="java">
-    enum EnumSingleton &#123;
-        INSTANCE;
-    &#125;
-</code></pre>
-<p>上面条件都是基于不使用反射获取对象，且除了枚举用反射创建会直接抛异常。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/12/second/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/12/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/12/hello-world/" class="archive-article-date">
-  	<time datetime="2021-08-12T07:44:19.964Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/12/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1056,6 +1069,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">主页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
