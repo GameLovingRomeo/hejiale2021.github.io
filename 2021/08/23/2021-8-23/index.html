@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | 罗密欧与猪上树</title>
+  <title>2021-8-23(多线程的synchronized锁，和锁升级) | 罗密欧与猪上树</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="罗密欧与猪上树">
-<meta property="og:url" content="http://example.com/archives/page/3/index.html">
+  <meta name="description" content="2021-08-23（多线程）1.（必做）synchronized关键字有哪些用法？请编码测试每种用法。synchronized 主要还是看锁住对象或者是class 根据下面的描述和代码来了解8锁    《一》 synchronizedDemo.java    《二》synchronizedDemo2.java    《三》synchronizedDemo3.java    《四》synchron">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021-8-23(多线程的synchronized锁，和锁升级)">
+<meta property="og:url" content="http://example.com/2021/08/23/2021-8-23/index.html">
 <meta property="og:site_name" content="罗密欧与猪上树">
+<meta property="og:description" content="2021-08-23（多线程）1.（必做）synchronized关键字有哪些用法？请编码测试每种用法。synchronized 主要还是看锁住对象或者是class 根据下面的描述和代码来了解8锁    《一》 synchronizedDemo.java    《二》synchronizedDemo2.java    《三》synchronizedDemo3.java    《四》synchron">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/08/23/2021-8-23/2.png">
+<meta property="og:image" content="http://example.com/2021/08/23/2021-8-23/2.png">
+<meta property="og:image" content="http://example.com/2021/08/23/2021-8-23/2.png">
+<meta property="og:image" content="http://example.com/2021/08/23/2021-8-23/2.png">
+<meta property="article:published_time" content="2021-08-23T04:13:33.000Z">
+<meta property="article:modified_time" content="2021-08-23T06:47:36.637Z">
 <meta property="article:author" content="H&amp;J&amp;L">
+<meta property="article:tag" content="日常页">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/08/23/2021-8-23/2.png">
   
     <link rel="alternative" href="/atom.xml" title="罗密欧与猪上树" type="application/atom+xml">
   
@@ -160,36 +170,76 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2021-8-23" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2021-8-23(多线程的synchronized锁，和锁升级)
+    </h1>
+  
+
+        
+        <a href="/2021/08/23/2021-8-23/" class="archive-article-date">
+  	<time datetime="2021-08-23T04:13:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-23</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="2021-08-23（多线程）1-（必做）synchronized关键字有哪些用法？请编码测试每种用法。"><a href="#2021-08-23（多线程）1-（必做）synchronized关键字有哪些用法？请编码测试每种用法。" class="headerlink" title="2021-08-23（多线程）1.（必做）synchronized关键字有哪些用法？请编码测试每种用法。"></a>2021-08-23（多线程）1.（必做）synchronized关键字有哪些用法？请编码测试每种用法。</h2><p>synchronized 主要还是看锁住对象或者是class</p>
+<h2 id="根据下面的描述和代码来了解8锁"><a href="#根据下面的描述和代码来了解8锁" class="headerlink" title="根据下面的描述和代码来了解8锁"></a>根据下面的描述和代码来了解8锁</h2><blockquote>
+<pre><code>   《一》 synchronizedDemo.java
+   《二》synchronizedDemo2.java
+   《三》synchronizedDemo3.java
+   《四》synchronizedDemo4.java
+</code></pre>
+</blockquote>
+<span id="more"></span>
+<blockquote>
+<p>《一》. Person 类中的方法上锁，线程A B 获调用对象person的两个同步方法， synchronized锁&gt;是同一个对象的调用者<br> 谁先拿到谁先执行。</p>
+</blockquote>
+<blockquote>
+<p>《二》.   1. 在Person中加一个普通方法eat(),他没有上synchronized关键字B线程发信息 C 线程干饭 ， 谁会先执行： 会先执行 干饭eat不受锁的影响，但会受主线程的时间影响<br>    2. 在new一个对象Person B C 线程分别执行两个同步方法 send() 和 call()<br>     两个对象两把锁，所以会按时间来执行，所以先输出打电话    </p>
+</blockquote>
+<blockquote>
+<p>《三》.   1.给我们的两个同步方法send()和call()加上   static<br>   加上static ，静态方法，类一加载就有了，锁得是person3的唯一的class模板，只&gt;有一个class对象<br>2.在new一个person对象，依然还是静态方法,当然还是锁的person的惟一的class模&gt;板，&gt;还是先发消息后打电话</p>
+</blockquote>
+<blockquote>
+<p>《四》 person4的两个同步方法 ， send() 被static 修饰 call() 就是普通的同步方法<br>send的锁 锁得是类的class模板call的锁 所得是调用的对象。两把锁，看时间了，所以先执行 打电话， 或执行 发短信<br>       2.在new 一个personA 执行send() B 执行call()<br>依然是两把锁，所以看时间，先执行，打电话，或执行发短信</p>
+</blockquote>
+<h2 id="《一》synchronizedDemo-java"><a href="#《一》synchronizedDemo-java" class="headerlink" title="《一》synchronizedDemo.java"></a>《一》<img src="/2021/08/23/2021-8-23/2.png">synchronizedDemo.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Person 类中的方法上锁，线程A B 获调用对象person的两个同步方法， synchronized锁是同一个对象的调用者</span></span><br><span class="line"><span class="comment"> * 谁先拿到谁先执行。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">synchronizedDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person person = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(person::send,<span class="string">&quot;A&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">2</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">new</span> Thread(person::send,<span class="string">&quot;B&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">&quot;发消息&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;打电话&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="《二》synchronizedDemo2-java"><a href="#《二》synchronizedDemo2-java" class="headerlink" title="《二》synchronizedDemo2.java"></a>《二》<img src="/2021/08/23/2021-8-23/2.png">synchronizedDemo2.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 1. 在Person中加一个普通方法eat(),他没有上synchronized关键字</span></span><br><span class="line"><span class="comment"> *          B线程发信息 C 线程干饭 ， 谁会先执行</span></span><br><span class="line"><span class="comment"> *          ： 会先执行 干饭</span></span><br><span class="line"><span class="comment"> *          eat不受锁的影响，但会受主线程的时间影响</span></span><br><span class="line"><span class="comment"> * 2. 在new一个对象Person B C 线程分别执行两个同步方法 send() 和 call()</span></span><br><span class="line"><span class="comment"> *    两个对象两把锁，所以会按时间来执行，所以先输出打电话</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">synchronizedDemo2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person2 person2 = <span class="keyword">new</span> Person2();</span><br><span class="line">        Person2 person3 = <span class="keyword">new</span> Person2();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">new</span> Thread(person2::send,<span class="string">&quot;A&quot;</span>).start();</span><br><span class="line">        <span class="comment">// 空闲时间</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">2</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(person3::call,<span class="string">&quot;D&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person2</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">&quot;发消息&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">&quot;打电话&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>   <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">&quot;干饭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="《三》synchronizedDemo3-java"><a href="#《三》synchronizedDemo3-java" class="headerlink" title="《三》synchronizedDemo3.java"></a>《三》<img src="/2021/08/23/2021-8-23/2.png">synchronizedDemo3.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  1.给我们的两个同步方法send()和call()加上   static</span></span><br><span class="line"><span class="comment"> *     加上static ，静态方法，类一加载就有了，锁得是person3的唯一的class模板，只有一个class对象</span></span><br><span class="line"><span class="comment"> *   2.在new一个person对象，依然还是静态方法,当然还是锁的person的惟一的class模板，还是先发消息后打电话</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">synchronizedDemo3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Person3 person3 = <span class="keyword">new</span> Person3();</span><br><span class="line">        Person3 person4 = <span class="keyword">new</span> Person3();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            person3.send();</span><br><span class="line">        &#125;,<span class="string">&quot;A&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">     TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line"><span class="comment">//        new Thread(()-&gt;&#123;</span></span><br><span class="line"><span class="comment">//            person3.call();</span></span><br><span class="line"><span class="comment">//        &#125;,&quot;B&quot;).start();</span></span><br><span class="line"><span class="comment">//        TimeUnit.SECONDS.sleep(3);</span></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            person4.call();</span><br><span class="line">        &#125;,<span class="string">&quot;B&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person3</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">&quot;发消息&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">&quot;打电话&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>   <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">&quot;干饭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="《四》synchronizedDemo4-java"><a href="#《四》synchronizedDemo4-java" class="headerlink" title="《四》synchronizedDemo4.java"></a>《四》<img src="/2021/08/23/2021-8-23/2.png">synchronizedDemo4.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 1. person4的两个同步方法 ， send() 被static 修饰</span></span><br><span class="line"><span class="comment"> *                        call() 就是普通的同步方法</span></span><br><span class="line"><span class="comment"> *              send的锁 锁得是类的class模板</span></span><br><span class="line"><span class="comment"> *              call的锁 所得是调用的对象。</span></span><br><span class="line"><span class="comment"> *              两把锁，</span></span><br><span class="line"><span class="comment"> *              看时间了，所以先执行 打电话， 或执行 发短信</span></span><br><span class="line"><span class="comment"> * 2. 在new 一个person</span></span><br><span class="line"><span class="comment"> *            A 执行send()</span></span><br><span class="line"><span class="comment"> *            B 执行call()</span></span><br><span class="line"><span class="comment"> *            依然是两把锁，所以看时间，先执行，打电话，或执行发短信</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">synchronizedDemo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Person4 person4  =  <span class="keyword">new</span> Person4();</span><br><span class="line">        Person4 person5  =  <span class="keyword">new</span> Person4();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            person4.send();</span><br><span class="line">        &#125;,<span class="string">&quot;A&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        TimeUnit.SECONDS.sleep(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            person5.call();</span><br><span class="line">        &#125;,<span class="string">&quot;B&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person4</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">&quot;发消息&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">&quot;打电话&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="（选做）什么是无锁、偏向锁、轻量级锁、重量级锁，简述synchronized锁升级的过程。"><a href="#（选做）什么是无锁、偏向锁、轻量级锁、重量级锁，简述synchronized锁升级的过程。" class="headerlink" title="（选做）什么是无锁、偏向锁、轻量级锁、重量级锁，简述synchronized锁升级的过程。"></a>（选做）什么是无锁、偏向锁、轻量级锁、重量级锁，简述synchronized锁升级的过程。</h2><blockquote>
+<p>Synchronized的锁升级过程(无锁-&gt;偏向锁-&gt;轻量级锁-&gt;重量级锁)</p>
+</blockquote>
+<blockquote>
+<p>当一个对象被创建存储在内存里边会涉及到一个对象头，里边有一块区域叫mark word，会保存一个无锁的状态。在一个线程访问到被synchronized修饰的代码块时，会将该线程的id保存到到mark world相应的区域，同时更改锁的状态为偏向锁。</p>
+</blockquote>
+<blockquote>
+<p>当出现了锁竞争的情况下，会看下当前线程还持有该锁不，若没有，就重新上偏向锁，若还是持有偏向锁，就将偏向锁转化为轻量级锁，并且这种锁的升级是不可逆的。因为这种转化会stop the world，因此对于一些多线程场景较多的应用，可以设置jvm参数，让应用不使用偏向锁。</p>
+</blockquote>
+<blockquote>
+<p>轻量级锁有两种：自旋锁，自适应自旋锁。对于自旋锁就是一个线程正持有该锁，另外一个线程进来了就等着，相当于执行一个循环，只到成功获取到了锁。但是循环是要消耗资源的，不可能让线程在那一直循环，就设置了一个固定的循环次数10，超过了10回就认为你获取不到该锁了，执行下一步操作，比如升级成重量级锁。对于自适应自旋锁，没有固定的循环次数，而是对于每个锁有一个学习能力，就是说对于某个锁，一个线程循环了5次拿到了，那么下一个线程也循环5次去获取这个锁，获取不到，就直接转成重量级锁。</p>
+</blockquote>
+<blockquote>
+<p>重量级锁是通过一个监视器锁对象monitor实现的,monitor随着对象的创建而创建。线程获取锁可以理解为获取monitor，成功之后会对monitor对象加一，释放掉了就减一。这种加一减一实际上是通过操作系统的mutex（互斥）、lock实现的。操作系统实现mutex、lock需要从用户态转换成核心态，成本比较大，耗费时间长。这就是synchronized效率低的原因。1.6之前，synchronized主要是依靠操作系统的mutex、lock指令，比较耗费资源，之后引入了偏向锁和轻量级锁的概念，提高了效率，这也是1.8中，concurrenthashmap使用synchronized锁的原因。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/16/2021-8-16/" class="archive-article-date">
-  	<time datetime="2021-08-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/16/2021-8-16/">2021-8-16javase</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -201,353 +251,127 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/23/2021-8-23/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/15/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2021-08-15T09:40:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/08/24/2021-8-24/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2021-8-24
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/22/2021-8-22/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2021-8-22</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/15/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/">八皇后问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2021-08-23%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%891-%EF%BC%88%E5%BF%85%E5%81%9A%EF%BC%89synchronized%E5%85%B3%E9%94%AE%E5%AD%97%E6%9C%89%E5%93%AA%E4%BA%9B%E7%94%A8%E6%B3%95%EF%BC%9F%E8%AF%B7%E7%BC%96%E7%A0%81%E6%B5%8B%E8%AF%95%E6%AF%8F%E7%A7%8D%E7%94%A8%E6%B3%95%E3%80%82"><span class="toc-number">1.</span> <span class="toc-text">2021-08-23（多线程）1.（必做）synchronized关键字有哪些用法？请编码测试每种用法。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E4%B8%8B%E9%9D%A2%E7%9A%84%E6%8F%8F%E8%BF%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E6%9D%A5%E4%BA%86%E8%A7%A38%E9%94%81"><span class="toc-number">2.</span> <span class="toc-text">根据下面的描述和代码来了解8锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%8A%E4%B8%80%E3%80%8BsynchronizedDemo-java"><span class="toc-number">3.</span> <span class="toc-text">《一》synchronizedDemo.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%8A%E4%BA%8C%E3%80%8BsynchronizedDemo2-java"><span class="toc-number">4.</span> <span class="toc-text">《二》synchronizedDemo2.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%8A%E4%B8%89%E3%80%8BsynchronizedDemo3-java"><span class="toc-number">5.</span> <span class="toc-text">《三》synchronizedDemo3.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%8A%E5%9B%9B%E3%80%8BsynchronizedDemo4-java"><span class="toc-number">6.</span> <span class="toc-text">《四》synchronizedDemo4.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E9%80%89%E5%81%9A%EF%BC%89%E4%BB%80%E4%B9%88%E6%98%AF%E6%97%A0%E9%94%81%E3%80%81%E5%81%8F%E5%90%91%E9%94%81%E3%80%81%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81%E3%80%81%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81%EF%BC%8C%E7%AE%80%E8%BF%B0synchronized%E9%94%81%E5%8D%87%E7%BA%A7%E7%9A%84%E8%BF%87%E7%A8%8B%E3%80%82"><span class="toc-number">7.</span> <span class="toc-text">（选做）什么是无锁、偏向锁、轻量级锁、重量级锁，简述synchronized锁升级的过程。</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/15/2021-8-15javase/" class="archive-article-date">
-  	<time datetime="2021-08-15T07:55:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/15/2021-8-15javase/">2021.8.15javase</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/15/IO%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8Fdemo/" class="archive-article-date">
-  	<time datetime="2021-08-15T07:13:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/15/IO%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8Fdemo/">IO的一个小demo(序列化)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/15/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85/" class="archive-article-date">
-  	<time datetime="2021-08-15T06:42:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/15/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85/">七种线程等待(如何让主线程等待t1执行完之后再开始执行自己的代码)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/14/%E9%80%92%E5%BD%92%E7%9A%84%E8%BF%B7%E5%AE%AB%E5%9B%9E%E6%BA%AF%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2021-08-14T11:32:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/14/%E9%80%92%E5%BD%92%E7%9A%84%E8%BF%B7%E5%AE%AB%E5%9B%9E%E6%BA%AF%E9%97%AE%E9%A2%98/">递归的迷宫回溯问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/14/three/" class="archive-article-date">
-  	<time datetime="2021-08-14T09:10:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/14/three/">three</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/13/my/" class="archive-article-date">
-  	<time datetime="2021-08-13T11:34:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/13/my/">my</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">主页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" class="archive-article-date">
-  	<time datetime="2021-08-13T09:34:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">递归的应用场景</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F1/" class="archive-article-date">
-  	<time datetime="2021-08-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F1/">数据结构-后缀表达式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -571,8 +395,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
