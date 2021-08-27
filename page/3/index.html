@@ -162,6 +162,309 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2021-8-14" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/17/2021-8-14/">有主线程mainThread和一个工作线程t1，问：如何让主线程等待t1执行完之后再开始执行自己的代码？提示：除了join()之外至少还有3种以上的方法</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/17/2021-8-14/" class="archive-article-date">
+  	<time datetime="2021-08-17T06:22:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一"><a href="#一" class="headerlink" title="一"></a>一</h3>
+        
+          <a class="article-more-a" href="/2021/08/17/2021-8-14/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/17/2021-8-14/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2021-8-15" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/17/2021-8-15/">请自己设计一个类，实现序列化接口，将类的对象写入文件中，然后再从文件读出来，打印对象信息</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/17/2021-8-15/" class="archive-article-date">
+  	<time datetime="2021-08-17T06:19:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> junit.framework.TestCase;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">io</span>的操作 </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">//   IODemo.up();</span></span><br><span class="line">   IODemo.down();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IODemo</span> <span class="keyword">extends</span> <span class="title">TestCase</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ObjectOutputStream objectOutputStream;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span>  <span class="title">up</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        User e = <span class="keyword">new</span> User();</span><br><span class="line">        e.setName(<span class="string">&quot;冰红茶&quot;</span>);</span><br><span class="line">        e.setNickName(<span class="string">&quot;绿茶&quot;</span>);</span><br><span class="line">        list.add(e);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            objectOutputStream  = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;E:/D/demo.txt&quot;</span>));</span><br><span class="line">            objectOutputStream.writeObject(list);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ioException) &#123;</span><br><span class="line">            ioException.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                objectOutputStream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException ioException) &#123;</span><br><span class="line">                ioException.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">down</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ObjectInputStream is = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(</span><br><span class="line">                    <span class="string">&quot;E:/D/demo.txt&quot;</span>));</span><br><span class="line">            List tempList = (List) is.readObject();<span class="comment">// 从流中读取List的数据</span></span><br><span class="line">            <span class="keyword">for</span> (Iterator iterator = tempList.iterator(); iterator.hasNext();) &#123;</span><br><span class="line">                System.out.print(iterator.next());</span><br><span class="line">            &#125;</span><br><span class="line">            is.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String nickName;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNickName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> nickName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNickName</span><span class="params">(String nickName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nickName = nickName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;user&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, nickName=&#x27;&quot;</span> + nickName + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/17/2021-8-15/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-线程安全的单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/17/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/17/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2021-08-17T06:14:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"><a href="#请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）" class="headerlink" title="请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）"></a>请写出至少2种线程安全的单例设计模式，并阐述他们的优缺点（提示：共4种）</h2>
+        
+          <a class="article-more-a" href="/2021/08/17/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/17/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2021-8-17" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/17/2021-8-17/">有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程， 写出自己的理解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/17/2021-8-17/" class="archive-article-date">
+  	<time datetime="2021-08-17T04:06:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>（必做）有下面的一个类，请问最后main方法输出是什么？请试着分析打印输出的过程，  写出自己的理解</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2021/08/17/2021-8-17/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/17/2021-8-17/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2021-8-16" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -643,394 +946,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/08/14/%E9%80%92%E5%BD%92%E7%9A%84%E8%BF%B7%E5%AE%AB%E5%9B%9E%E6%BA%AF%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-three" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/14/three/">three</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/14/three/" class="archive-article-date">
-  	<time datetime="2021-08-14T09:10:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/14/three/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-my" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/13/my/">my</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/13/my/" class="archive-article-date">
-  	<time datetime="2021-08-13T11:34:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一个正在学习的人 </p>
-<p><img src="/2021/08/13/my/55.png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">主页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/13/my/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-递归的应用场景" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">递归的应用场景</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" class="archive-article-date">
-  	<time datetime="2021-08-13T09:34:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <meta name="referrer" content="no-referrer">
-        
-          <a class="article-more-a" href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/13/%E9%80%92%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-字符串计算式转后缀表达式的字符串list形式1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F1/">数据结构-后缀表达式</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F1/" class="archive-article-date">
-  	<time datetime="2021-08-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <span id="more"></span>
-
-<h2 id="后缀表达式"><a href="#后缀表达式" class="headerlink" title="后缀表达式"></a>后缀表达式</h2><h4 id="简单的字符串计算式，转化为后缀表达式的list形式"><a href="#简单的字符串计算式，转化为后缀表达式的list形式" class="headerlink" title="简单的字符串计算式，转化为后缀表达式的list形式"></a>简单的字符串计算式，转化为后缀表达式的list形式</h4><hr>
-<pre><code>思路： 需要一个符号栈s1 ，
-          一个数字栈 s2     
- 从左往右检索  数字直接加入 s2
-               操作符的话先看优先级
-                  1.如果s1 为空，或者是左括号， 那么直接加入s1
-                   2.不为空，若优先级比栈顶元素优先级高，直接加入s1
-                       否则就将s1栈顶弹出加入到s2 ，然后继续跟下面的比较
-                   3.如果是括号， 左括号直接加入s1，右括号，就把所有的s1弹出加到s2，直到遇见左括号停止
-                   并将括号废弃
-              重复，直到i到达list的最后边结束，
-              将s1的剩余弹出到s2中，
-              返回 s2的逆序就是 中缀表达式的后缀表达式
-</code></pre>
-<p> main方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  String s = <span class="string">&quot;1+((2+3)*4)-5&quot;</span>;</span><br><span class="line">  List&lt;String&gt; arrayList = toInfixList(s); <span class="comment">// 先将一个 s 的字符串表达式转化为 一个list，便于检索</span></span><br><span class="line">    System.out.println(arrayList);</span><br><span class="line">    List&lt;String&gt; list = toArrSuffix(arrayList); <span class="comment">// 将list 转化为一个 后缀表达式的 字符串数组</span></span><br><span class="line">    System.out.println(list);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>```java<br>    // 将一个计算式list 转化为后缀表达式的list</p>
-<p>public static List<String> toArrSuffix(List<String> list){</String></String></p>
-<pre><code>// 初始化两个栈
-Stack&lt;String&gt; s1 = new Stack&lt;&gt;();
-List&lt;String&gt; s2 = new ArrayList&lt;&gt;(); // 由于s2 并未涉及到栈的pop，所以化简将栈替换为list
-for (String s : list) &#123;
-    // 如果是
-    if (s.matches(&quot;\\d+&quot;))&#123;
-        s2.add(s);
-    &#125;else if (s.equals(&quot;(&quot;))&#123;
-        s1.push(s);
-    &#125;else if (s.equals(&quot;)&quot;))&#123;
-        while(!s1.peek().equals(&quot;(&quot;))&#123;
-            s2.add(s1.pop());
-        &#125;
-        s1.pop(); // 弹出s1的（
-    &#125;else &#123;
-        while(s1.size() !=0 &amp;&amp; Operation.orderPlus(s1.peek())&gt;= Operation.orderPlus(s) )&#123;
-            s2.add(s1.pop());
-        &#125;
-        s1.push(s);
-    &#125;
-&#125;
-while(s1.size() !=0)&#123;
-    s2.add(s1.pop());
-&#125;
-return s2;
-</code></pre>
-<p>}</p>
-<p>// 判断优先级</p>
-<p>static class Operation{</p>
-<pre><code>private static int add = 1;
-private static int sub = 1;
-private static int mul = 2;
-private static int div = 2;
-public static int orderPlus(String mark) &#123;
-
-    int result = 0;
-    switch (mark) &#123;
-        case &quot;+&quot;:
-            result = add;
-            break;
-        case &quot;-&quot;:
-            result = sub;
-            break;
-        case &quot;*&quot;:
-            result = mul;
-            break;
-        case &quot;/&quot;:
-            result = div;
-            break;
-        default:
-            System.out.println(&quot;未见此操作符&quot;);
-            break;
-    &#125;
-    return result;
-&#125;
-</code></pre>
-<p>}</p>
-<p>// 将一个计算式的字符串转为一个list</p>
-<p>public static List<String> toInfixList(String suffix) {</String></p>
-<pre><code>List&lt;String&gt; list = new ArrayList&lt;&gt;();
-int i = 0;
-char c = &#39; &#39;;
-String str = &quot;&quot;;
-do &#123;
-    if ((c = suffix.charAt(i)) &lt; 48 || (c = suffix.charAt(i)) &gt; 57) &#123;
-        // 说明当前是字符
-        list.add(String.valueOf(c));
-        i++;
-    &#125; else &#123;
-        // 说明当前是个数字
-        while (i &lt; suffix.length() &amp;&amp; (c = suffix.charAt(i)) &gt;= 48 &amp;&amp; (c = suffix.charAt(i)) &lt;= 57) &#123;
-            str += c;
-            i++;
-        &#125;
-        list.add(str);
-        // 置空
-        str = &quot;&quot;;
-    &#125;
-&#125; while (i &lt; suffix.length());
-return list;
-</code></pre>
-<p>}```</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%A1%E7%AE%97%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2list%E5%BD%A2%E5%BC%8F1/">展开全文 >></a>
         </p>
       
 

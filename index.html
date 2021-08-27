@@ -162,6 +162,321 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-线性查找分析和实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/27/%E7%BA%BF%E6%80%A7%E6%9F%A5%E6%89%BE%E5%88%86%E6%9E%90%E5%92%8C%E5%AE%9E%E7%8E%B0/">线性查找分析和实现</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/27/%E7%BA%BF%E6%80%A7%E6%9F%A5%E6%89%BE%E5%88%86%E6%9E%90%E5%92%8C%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+  	<time datetime="2021-08-27T08:24:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>线性查找 :没什么要讲的，比较简单<br></p>
+</blockquote>
+<blockquote>
+<p>二分查找 :需要数组必须是有序的,<br></p>
+</blockquote>
+<blockquote>
+<p>插值查找算法 :Interpolation Search ,其实也是二分查找，只不过寻找中间指的操作比较刁钻<br><br> mid = low + (（要找的值 -左边界）/右边界的值 - 左边界的值) * （右边界 - 左边界）<br><br>个人理解，看弹幕说好像是研一的数值分析，还是什么拉格朗日中值定理，我觉得就是利用了线性<br><br>的初始数组必须是有序的，有比例来模糊靠近要寻找的值，来减少递归的次数</p>
+<p>斐波那契查找算法： 什么鸡掰</p>
+</blockquote>
+<h2 id="插值查找算法"><a href="#插值查找算法" class="headerlink" title="插值查找算法"></a>插值查找算法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InterpolationSearch</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            arr[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> x = interpolationSearch(arr, <span class="number">0</span>, <span class="number">99</span>, <span class="number">50</span>);</span><br><span class="line">        System.out.println(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 为了简单，就只检索一个就完事了</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">static</span>  <span class="keyword">int</span> <span class="title">interpolationSearch</span><span class="params">(<span class="keyword">int</span>[] arr ,<span class="keyword">int</span> left, <span class="keyword">int</span> right,<span class="keyword">int</span> youWant)</span></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &gt; right || youWant &gt; arr[arr.length-<span class="number">1</span>] || youWant &lt;arr[<span class="number">0</span>] )&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 计算mid 采用牛逼一点的 ,自适应的一种写法</span></span><br><span class="line">        <span class="keyword">int</span> mid = left + ((right-left)*(youWant - arr[left])/(arr[right] - arr[left]));</span><br><span class="line">        <span class="keyword">int</span> midValue = arr[mid];</span><br><span class="line">        <span class="keyword">if</span> (youWant &gt; midValue)&#123;</span><br><span class="line">            <span class="comment">// 往右遍历</span></span><br><span class="line">          <span class="keyword">return</span>   interpolationSearch(arr,mid+<span class="number">1</span>,left,youWant);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (youWant &lt; midValue)&#123;</span><br><span class="line">            <span class="keyword">return</span> interpolationSearch(arr,left,mid-<span class="number">1</span>,youWant);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> arr[mid];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 二分查找</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinarySearch</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>&#125;;</span><br><span class="line">     <span class="comment">//   System.out.println(binarySearch(arr, 0, arr.length - 1, 10));</span></span><br><span class="line">        <span class="comment">//改进的</span></span><br><span class="line">        System.out.println(binarySearch2(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>, <span class="number">1000</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 考虑有相同的情况</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">static</span> ArrayList&lt;Integer&gt; <span class="title">binarySearch2</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = (left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> midValue=arr[mid];</span><br><span class="line">        <span class="keyword">if</span> (value &gt; midValue)&#123; <span class="comment">//向右递归</span></span><br><span class="line">            <span class="keyword">return</span>   binarySearch2(arr,mid+<span class="number">1</span>,right,value);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(value &lt; midValue)&#123;</span><br><span class="line">            <span class="keyword">return</span> binarySearch2(arr,left,mid-<span class="number">1</span>,value);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             *  如果出现了相同的元素。又因为他原本就是有序的数组，所以只能会出现</span></span><br><span class="line"><span class="comment">             *  他的附近</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            ArrayList&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            <span class="comment">// 往左扫描全加入进去</span></span><br><span class="line">            <span class="keyword">int</span> temp = mid-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span> (temp &lt; <span class="number">0</span> || arr[temp] != value)&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                arrayList.add(temp);</span><br><span class="line">                <span class="comment">// temp往左移动</span></span><br><span class="line">                temp-=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 左边搞完，搞右边</span></span><br><span class="line">             temp = mid + <span class="number">1</span> ;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span> (temp &gt; arr.length-<span class="number">1</span> || arr[temp] != value)&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                arrayList.add(temp);</span><br><span class="line">                <span class="comment">// temp往左移动</span></span><br><span class="line">                temp +=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            arrayList.add(mid);</span><br><span class="line">            <span class="keyword">return</span> arrayList;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Deprecated</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">static</span>  <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> left,<span class="keyword">int</span> right,<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right)&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = (left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> midValue=arr[mid];</span><br><span class="line">        <span class="keyword">if</span> (value &gt; midValue)&#123; <span class="comment">//向右递归</span></span><br><span class="line">          <span class="keyword">return</span>   binarySearch(arr,mid+<span class="number">1</span>,right,value);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(value &lt; midValue)&#123;</span><br><span class="line">           <span class="keyword">return</span> binarySearch(arr,left,mid-<span class="number">1</span>,value);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线性查找"><a href="#线性查找" class="headerlink" title="线性查找"></a>线性查找</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *   线性查找</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SeqSearch</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">9</span>,<span class="number">11</span>,-<span class="number">1</span>,<span class="number">34</span>,<span class="number">89</span>&#125;;</span><br><span class="line">        System.out.println(search(arr, -<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  线性查找一个符合要求的值</span></span><br><span class="line"><span class="comment">     *  返回的数据index</span></span><br><span class="line"><span class="comment">     *  如果没有就返回 -1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">static</span>  <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] arr , <span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[i] == value)&#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/27/%E7%BA%BF%E6%80%A7%E6%9F%A5%E6%89%BE%E5%88%86%E6%9E%90%E5%92%8C%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2021-8-27" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/27/2021-8-27/">2021-8-27</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/27/2021-8-27/" class="archive-article-date">
+  	<time datetime="2021-08-27T08:23:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简述LongAdder-对-AtomicLong-的改进的思路。"><a href="#简述LongAdder-对-AtomicLong-的改进的思路。" class="headerlink" title="简述LongAdder 对 AtomicLong 的改进的思路。"></a>简述LongAdder 对 AtomicLong 的改进的思路。</h2><blockquote>
+<p>对于高并发下大量线程会同时竞争同一个原子变量，但是由于只有一个线程的cas会执行成功，造成大量的线程竞争失败，这会白白浪费cp的资源。所以longAdder的改进思路就是把一个原子变量分解为多个变量，让同样多的线程去竞争多个资源。longAdder 内部维护了U盾讴歌cell，每个Cell里面有一个初始值为0的long型变量，在同等并发量的情况下，争夺单个变量的线程会减少，这是变相地减少了争夺共享资源的并发量。</p>
+</blockquote>
+<h2 id="什么是AQS，在JUC里有哪些典型的AQS实现？"><a href="#什么是AQS，在JUC里有哪些典型的AQS实现？" class="headerlink" title="什么是AQS，在JUC里有哪些典型的AQS实现？"></a>什么是AQS，在JUC里有哪些典型的AQS实现？</h2><blockquote>
+<p>AQS 是juc 下最核心的类，AQS内部是使用了双向链表将等待线程链接起来，当发生并发竞争的时候，就会初始化该队列并让线程进入睡眠等待唤醒，同时每个节点会根据是否为共享锁标记状态为共享模式或独占模式。</p>
+</blockquote>
+<blockquote>
+<p>ReentrantLock、CountDownLatch、Semaphore、FutureTask </p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/27/2021-8-27/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基数排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/27/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">基数排序</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/27/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2021-08-27T04:52:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基数排序（稳定排序）（radix-sort）是桶排序的一个扩展-，属于-“分配式排序”（distribution-sort），又称”桶子法”（bucket-sort）或者是bin-sort，"><a href="#基数排序（稳定排序）（radix-sort）是桶排序的一个扩展-，属于-“分配式排序”（distribution-sort），又称”桶子法”（bucket-sort）或者是bin-sort，" class="headerlink" title="基数排序（稳定排序）（radix sort）是桶排序的一个扩展   ，属于 “分配式排序”（distribution sort），又称”桶子法”（bucket sort）或者是bin sort，"></a>基数排序（稳定排序）（radix sort）是桶排序的一个扩展   ，属于 “分配式排序”（distribution sort），又称”桶子法”（bucket sort）或者是bin sort，</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  基数排序(桶排序)</span></span><br><span class="line"><span class="comment"> *  测试8万个数据的时间(ms) 25 34 27</span></span><br><span class="line"><span class="comment"> *  测试800万个数据的时间(ms) 635 567 535</span></span><br><span class="line"><span class="comment"> *  int[] arr = &#123;53,3,542,748,14,214&#125;;</span></span><br><span class="line"><span class="comment"> *  核心思想 10 个桶子 第一轮排序，先看    《个位 》  的大小，然后依次放入</span></span><br><span class="line"><span class="comment"> *     +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+</span></span><br><span class="line"><span class="comment"> *     |    |   |    |   |542 |   |53  |   |14  |   |    |   |    |   |    |   |748 |   |    |</span></span><br><span class="line"><span class="comment"> *     |    |   |    |   |    |   |3   |   |214 |   |    |   |    |   |    |   |    |   |    |</span></span><br><span class="line"><span class="comment"> *     |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |</span></span><br><span class="line"><span class="comment"> *     +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+</span></span><br><span class="line"><span class="comment"> *       0        1        2        3        4        5        6        7        8         9</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *     第一次结束后 arr = &#123;542,53,3,14,214,748&#125; 继续看 《十位》依次放入</span></span><br><span class="line"><span class="comment"> *     +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+</span></span><br><span class="line"><span class="comment"> *     |3   |   |14  |   |    |   |    |   |542 |   |53  |   |    |   |    |   |    |   |    |</span></span><br><span class="line"><span class="comment"> *     |    |   |214 |   |    |   |    |   |748 |   |    |   |    |   |    |   |    |   |    |</span></span><br><span class="line"><span class="comment"> *     |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |</span></span><br><span class="line"><span class="comment"> *     +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+</span></span><br><span class="line"><span class="comment"> *       0        1        2        3        4        5        6        7        8         9</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *     第二次结束后 arr = &#123;3,14,214,542,748,53&#125; 继续看 《百位》依次放入</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *     +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+</span></span><br><span class="line"><span class="comment"> *     |3   |   |    |   |214 |   |    |   |    |   |542 |   |    |   |748 |   |    |   |    |</span></span><br><span class="line"><span class="comment"> *     |14  |   |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |</span></span><br><span class="line"><span class="comment"> *     |53  |   |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |   |    |</span></span><br><span class="line"><span class="comment"> *     +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+   +----+</span></span><br><span class="line"><span class="comment"> *       0        1        2        3        4        5        6        7        8         9</span></span><br><span class="line"><span class="comment"> *     第三次结束后 arr = &#123;3,14,53,214,542,748&#125; 此时以及完成了</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RadixSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">/*        int[] arr = &#123;53,3,542,748,14,214&#125;;</span></span><br><span class="line"><span class="comment">        // 实验 第一次结束</span></span><br><span class="line"><span class="comment">        radixSort(arr);</span></span><br><span class="line"><span class="comment">        System.out.println(Arrays.toString(arr));*/</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 8000 0000相当于多少内存  11 * 8000 0000 * 4 /1024 /1024/1024 = 3.3G</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">8000000</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8000000</span>; i++) &#123;</span><br><span class="line">            arr[i] = (<span class="keyword">int</span>) (Math.random() * <span class="number">8000000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> l = System.currentTimeMillis();</span><br><span class="line">        radixSort(arr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> l1 = System.currentTimeMillis();</span><br><span class="line">        System.out.println(l1 - l);</span><br><span class="line">    <span class="comment">//    System.out.println(Arrays.toString(arr));</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">radixSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">        <span class="comment">// todo 总结</span></span><br><span class="line">        <span class="keyword">int</span>[][] tong = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>][arr.length];</span><br><span class="line">        <span class="comment">// 创建一个一维数组,来记住每个桶的放置数据的个数</span></span><br><span class="line">        <span class="keyword">int</span>[] countArr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];<span class="comment">// 所以他的长度和桶的个数相同</span></span><br><span class="line">        <span class="comment">// 获取数组最大的数</span></span><br><span class="line">        <span class="keyword">int</span> max = arr[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[i] &gt; max)&#123;</span><br><span class="line">                max = arr[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 然后获取最大的长度</span></span><br><span class="line">        <span class="keyword">int</span> MaxLength = (max + <span class="string">&quot;&quot;</span>).length();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> P = <span class="number">0</span>, n=<span class="number">1</span>; P &lt; MaxLength; P++,n*=<span class="number">10</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">                <span class="comment">// 取数据的个位</span></span><br><span class="line">                <span class="keyword">int</span> i1 = arr[i] /n % <span class="number">10</span>; <span class="comment">// 个位数</span></span><br><span class="line">                tong[  i1  ][countArr[i1]]  = arr[i];  <span class="comment">// countArr[i1] 表示第i1 个桶</span></span><br><span class="line">                                                       <span class="comment">//的数据的个数是几个</span></span><br><span class="line">                countArr[i1]++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 然后将数据取出放回到原数组</span></span><br><span class="line">            <span class="comment">// 定义一个数组的指针</span></span><br><span class="line">            <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">0</span>; t &lt; countArr.length; t++) &#123; <span class="comment">// t 表遍历的当前那个桶</span></span><br><span class="line">                <span class="keyword">if</span> (countArr[t] !=<span class="number">0</span>)&#123; <span class="comment">// 说明有数据，拿出来</span></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; countArr[t]; k++) &#123; <span class="comment">// k表示数据在数组中的位置</span></span><br><span class="line">                        arr[temp] = tong[t][k];</span><br><span class="line">                        temp++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 最重要的一步是用完某一个桶后将给桶的数据清除，</span></span><br><span class="line">                <span class="comment">//  tong[t] = 0;</span></span><br><span class="line">                countArr[t] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*        // 整了一盒二维数组来模拟桶， 下标表示0123456789桶，</span></span><br><span class="line"><span class="comment">             且存放数据的长度(桶的高度)先默认为数组长度</span></span><br><span class="line"><span class="comment">        int[][] tong = new int[10][arr.length];</span></span><br><span class="line"><span class="comment">        // 创建一个一维数组,来记住每个桶的放置数据的个数</span></span><br><span class="line"><span class="comment">        int[] countArr = new int[10];// 所以他的长度和桶的个数相同</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        for (int i = 0; i &lt; arr.length; i++) &#123;</span></span><br><span class="line"><span class="comment">              // 取数据的个位</span></span><br><span class="line"><span class="comment">            int i1 = arr[i] % 10; // 个位数</span></span><br><span class="line"><span class="comment">            tong[  i1  ][countArr[i1]]  = arr[i];  // countArr[i1] 表示第i1 个桶的数</span></span><br><span class="line"><span class="comment">                                                             据的个数是几个</span></span><br><span class="line"><span class="comment">            countArr[i1]++;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">         // 然后将数据取出放回到原数组</span></span><br><span class="line"><span class="comment">        // 定义一个数组的指针</span></span><br><span class="line"><span class="comment">        int temp = 0;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">            for (int t = 0; t &lt; 10; t++) &#123; // t 表遍历的当前那个桶</span></span><br><span class="line"><span class="comment">                if (countArr[t] !=0)&#123; // 说明有数据，拿出来</span></span><br><span class="line"><span class="comment">                    for (int k = 0; k &lt; countArr[t]; k++) &#123; // k表示数据在数组中的位置</span></span><br><span class="line"><span class="comment">                        arr[temp] = tong[t][k];</span></span><br><span class="line"><span class="comment">                        temp++;</span></span><br><span class="line"><span class="comment">                    &#125;</span></span><br><span class="line"><span class="comment">                &#125;</span></span><br><span class="line"><span class="comment">                // 最重要的一步是用完某一个桶后将给桶的数据清除，</span></span><br><span class="line"><span class="comment">              //  tong[t] = 0;</span></span><br><span class="line"><span class="comment">                countArr[t] = 0;</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        // 第一次结束正确</span></span><br><span class="line"><span class="comment">        // 开始第二次</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        for (int i = 0; i &lt; arr.length; i++) &#123;</span></span><br><span class="line"><span class="comment">            // 取数据的个位</span></span><br><span class="line"><span class="comment">            int i1 = arr[i] /10 % 10; // 个位数</span></span><br><span class="line"><span class="comment">            tong[  i1  ][countArr[i1]]  = arr[i];  // countArr[i1] 表示第i1 个桶 </span></span><br><span class="line"><span class="comment">                                                           //的数据的个数是几个</span></span><br><span class="line"><span class="comment">            countArr[i1]++;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        // 然后将数据取出放回到原数组</span></span><br><span class="line"><span class="comment">        // 定义一个数组的指针</span></span><br><span class="line"><span class="comment">        temp = 0;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        for (int t = 0; t &lt; 10; t++) &#123; // t 表遍历的当前那个桶</span></span><br><span class="line"><span class="comment">            if (countArr[t] !=0)&#123; // 说明有数据，拿出来</span></span><br><span class="line"><span class="comment">                for (int k = 0; k &lt; countArr[t]; k++) &#123; // k表示数据在数组中的位置</span></span><br><span class="line"><span class="comment">                    arr[temp] = tong[t][k];</span></span><br><span class="line"><span class="comment">                    temp++;</span></span><br><span class="line"><span class="comment">                &#125;</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">            countArr[t] = 0;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        // 开始第三次</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        for (int i = 0; i &lt; arr.length; i++) &#123;</span></span><br><span class="line"><span class="comment">            // 取数据的个位</span></span><br><span class="line"><span class="comment">            int i1 = arr[i] /100 % 10; // 个位数</span></span><br><span class="line"><span class="comment">            tong[  i1  ][countArr[i1]]  = arr[i];  // countArr[i1] 表示第i1 个桶</span></span><br><span class="line"><span class="comment">                                                    //的数据的个数是几个</span></span><br><span class="line"><span class="comment">            countArr[i1]++;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        // 然后将数据取出放回到原数组</span></span><br><span class="line"><span class="comment">        // 定义一个数组的指针</span></span><br><span class="line"><span class="comment">        temp = 0;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        for (int t = 0; t &lt; 10; t++) &#123; // t 表遍历的当前那个桶</span></span><br><span class="line"><span class="comment">            if (countArr[t] !=0)&#123; // 说明有数据，拿出来</span></span><br><span class="line"><span class="comment">                for (int k = 0; k &lt; countArr[t]; k++) &#123; // k表示数据在数组中的位置</span></span><br><span class="line"><span class="comment">                    arr[temp] = tong[t][k];</span></span><br><span class="line"><span class="comment">                    temp++;</span></span><br><span class="line"><span class="comment">                &#125;</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">            countArr[t] = 0;</span></span><br><span class="line"><span class="comment">        &#125;*/</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/27/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-归并排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/26/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/26/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2021-08-26T12:49:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 归并排序是稳定排序，它也是一种十分高效的排序，能利用完全二叉树特性的排序一般性能都不会太差。</span></span><br><span class="line"><span class="comment"> * java中Arrays.sort()采用了一种名为TimSort的排序算法，就是归并排序的优化版本。</span></span><br><span class="line"><span class="comment"> * 每次合并操作的平均时间复杂度为O(n)，而完全二叉树的深度为|log2n|。</span></span><br><span class="line"><span class="comment"> * 总的平均时间复杂度为O(nlogn)。而且，归并排序的最好，最坏，平均时间复杂度均为O(nlogn)。</span></span><br><span class="line"><span class="comment"> * 8万个数据(ms) 23</span></span><br><span class="line"><span class="comment"> * 测试排序时间：800 万个数据(ms) 1203 1346</span></span><br><span class="line"><span class="comment"> *                      8, 4, 5, 7, 1, 3, 6, 2</span></span><br><span class="line"><span class="comment"> *           先分治   8  4  5  7          1  3  6  2</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *              8  4      5   7       1   3      6   2</span></span><br><span class="line"><span class="comment"> *              </span></span><br><span class="line"><span class="comment"> *          8      4     5     7        1     3      6     2</span></span><br><span class="line"><span class="comment"> *          </span></span><br><span class="line"><span class="comment"> *          在合并</span></span><br><span class="line"><span class="comment"> *            4,8           5,7            1,3        2,6</span></span><br><span class="line"><span class="comment"> *            </span></span><br><span class="line"><span class="comment"> *                 4,5,7,8                    1,2,3,6</span></span><br><span class="line"><span class="comment"> *                 </span></span><br><span class="line"><span class="comment"> *                          1,2,3,4,5,6,7,8</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MergeSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// int[] arr = &#123;8,4,5,7,1,3,6,2&#125;;</span></span><br><span class="line">        <span class="comment">//int[] arr1 = &#123;4,5,7,8,1,2,3,6&#125;; // 测试merge方法</span></span><br><span class="line">  <span class="comment">//      merge(arr,0,3,7,new int[8]);</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">80000</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">80000</span>; i++) &#123;</span><br><span class="line">            arr[i] = (<span class="keyword">int</span>) (Math.random() * <span class="number">8000000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> l = System.currentTimeMillis();</span><br><span class="line">        mergeSort(arr,<span class="number">0</span>, arr.length-<span class="number">1</span>, <span class="keyword">new</span> <span class="keyword">int</span>[arr.length]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> l1 = System.currentTimeMillis();</span><br><span class="line">        System.out.println(l1 - l);</span><br><span class="line"></span><br><span class="line">     <span class="comment">//   System.out.println(Arrays.toString(arr));</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// todo 真正的归并排序</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>[] arr ,<span class="keyword">int</span> left,<span class="keyword">int</span> right,<span class="keyword">int</span>[] temp)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &lt; right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left+right)/<span class="number">2</span>;</span><br><span class="line">            <span class="comment">// 左边递归</span></span><br><span class="line">            mergeSort(arr,left,mid,temp);</span><br><span class="line">            <span class="comment">// 右边递归</span></span><br><span class="line">            mergeSort(arr,mid+<span class="number">1</span>,right,temp);</span><br><span class="line">            merge(arr,left,mid, right,temp);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//todo merge 的那部分方法</span></span><br><span class="line">    <span class="comment">//  4 5 7 8  和 1 2 3 6</span></span><br><span class="line">    <span class="comment">//  |           |     |</span></span><br><span class="line">    <span class="comment">//  left        mid   right</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] arr ,<span class="keyword">int</span> left,<span class="keyword">int</span> mid ,<span class="keyword">int</span> right,<span class="keyword">int</span>[] temp)</span></span>&#123;</span><br><span class="line">  <span class="comment">//      String count = &quot;xxx&quot;;</span></span><br><span class="line">  <span class="comment">//      System.out.println(count);</span></span><br><span class="line">        <span class="comment">// 很简单就是之前类似两个有序链表的合并成一个有序链表</span></span><br><span class="line">        <span class="keyword">int</span> i = left;</span><br><span class="line">        <span class="keyword">int</span> j = mid+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> t = <span class="number">0</span> ;  <span class="comment">// temp的指针</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= right )&#123;</span><br><span class="line">            <span class="comment">// 左边检索往newArr里面加入</span></span><br><span class="line">            <span class="keyword">if</span> (arr[i] &gt;= arr[j]) &#123;</span><br><span class="line">                temp[t++] = arr[j++];</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                temp[t++] = arr[i++];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// * 2.当数组其中有一个添加完了，但是另一个还未加完，很好剩余部分直接加进去</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 然后检验哪个没走完</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt;= mid )&#123; <span class="comment">// 说明后面一个走完了</span></span><br><span class="line">            <span class="comment">// AbstractQueuedSynchronizer</span></span><br><span class="line">            temp[t++] = arr[i++];</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (j  &lt;=right )&#123; <span class="comment">// 说明后面一个走完了</span></span><br><span class="line">            <span class="comment">// AbstractQueuedSynchronizer</span></span><br><span class="line">            temp[t++] = arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将temp的数据全都拷贝到原数组中去</span></span><br><span class="line">        t = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">int</span> template = left;</span><br><span class="line">   <span class="comment">//     System.out.println(&quot;template:&quot;+template+&quot; , right:&quot;+right);</span></span><br><span class="line">        <span class="keyword">while</span>(template&lt;=right)&#123;</span><br><span class="line">            arr[template++] = temp[t++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统学习页</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/26/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -182,7 +497,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 思路分析 快速排序</span></span><br><span class="line"><span class="comment"> *  取一个中间轴，左边是小于他的，右边是大于他的</span></span><br><span class="line"><span class="comment"> *  完成上面这步后， l 和 r 也碰面了</span></span><br><span class="line"><span class="comment"> *  所以讲l 右移一位， r左移一位防止出现问题</span></span><br><span class="line"><span class="comment"> *  然后开始递归调用</span></span><br><span class="line"><span class="comment"> * arr  =  [-9 ,78 ,0 ,23 ,-567 ,70]</span></span><br><span class="line"><span class="comment"> * 8万个数据 时间测试(ms) 44 34 45</span></span><br><span class="line"><span class="comment"> * 800万个 (ms)  1127 1112</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">//       int[] arr  =  &#123;-9 ,0 ,0 ,23 ,-567 ,70&#125;;</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">8000000</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8000000</span>; i++) &#123;</span><br><span class="line">            arr[i] = (<span class="keyword">int</span>) (Math.random() * <span class="number">8000000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> l = System.currentTimeMillis();</span><br><span class="line">        quickSort(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> l1 = System.currentTimeMillis();</span><br><span class="line">        System.out.println(l1 - l);</span><br><span class="line"><span class="comment">//        int[] arr  =  &#123;1 ,2 ,3 ,6 ,0 ,4 , 5&#125;;</span></span><br><span class="line"><span class="comment">//        quickSort(arr,0,arr.length-1);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        System.out.println(Arrays.toString(arr));</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = left; <span class="comment">// 左</span></span><br><span class="line">        <span class="keyword">int</span> r = right; <span class="comment">// 右</span></span><br><span class="line">        <span class="keyword">int</span> mid = arr[(left + right) / <span class="number">2</span>];</span><br><span class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123; <span class="comment">// 当两个没有碰面时</span></span><br><span class="line">            <span class="comment">// 左侧的往右跑，右侧的往做跑</span></span><br><span class="line">            <span class="keyword">while</span> (arr[l] &lt; mid) &#123;  <span class="comment">// 如果左边的数大于mid就退出了，就找到了左边的 大于mid的值，记录位置</span></span><br><span class="line">                l += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 右侧也开始操作</span></span><br><span class="line">            <span class="keyword">while</span> ((arr[r]) &gt; mid) &#123;  <span class="comment">// 如果右边的数字小于mid也同样退出循环了，记录了r的位置</span></span><br><span class="line">                r -= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 当来到这里就说明两边都找到了条件的arr[?] 的数据</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (l &gt;= r) &#123;</span><br><span class="line">                <span class="comment">// 说明两个人碰头了，都到达 mid了</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//让他们交换</span></span><br><span class="line">            temp = arr[l];</span><br><span class="line">            arr[l] = arr[r];</span><br><span class="line">            arr[r] = temp;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (arr[l] == mid) &#123; <span class="comment">// 发现当前数字和mid相等，没必要回去，直接放到右边第一个</span></span><br><span class="line">                r -= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (arr[r] == mid) &#123; <span class="comment">// 发现当前数字和mid相等，没必要回去，直接放到右边第一个</span></span><br><span class="line">                l += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 完成上面的任务之后，mid前是小于mid的，mid后是大于mid的</span></span><br><span class="line">        <span class="comment">// 当l == r 时，会导致栈溢出</span></span><br><span class="line">        <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">            l += <span class="number">1</span>;</span><br><span class="line">            r -= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 然后左边继续递归</span></span><br><span class="line">        <span class="keyword">if</span> (left &lt; r) &#123;</span><br><span class="line">            quickSort(arr, left, r);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 向右边递归</span></span><br><span class="line">        <span class="keyword">if</span> (right &gt; l) &#123;</span><br><span class="line">            quickSort(arr, l, right);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 思路分析 快速排序</span></span><br><span class="line"><span class="comment"> *  取一个中间轴，左边是小于他的，右边是大于他的</span></span><br><span class="line"><span class="comment"> *  完成上面这步后， l 和 r 也碰面了</span></span><br><span class="line"><span class="comment"> *  所以讲l 右移一位， r左移一位防止出现问题</span></span><br><span class="line"><span class="comment"> *  然后开始递归调用</span></span><br><span class="line"><span class="comment"> * arr  =  [-9 ,78 ,0 ,23 ,-567 ,70]</span></span><br><span class="line"><span class="comment"> * 8万个数据 时间测试(ms) 44 34 45</span></span><br><span class="line"><span class="comment"> * 800万个 (ms)  1127 1112</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">//       int[] arr  =  &#123;-9 ,0 ,0 ,23 ,-567 ,70&#125;;</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">8000000</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8000000</span>; i++) &#123;</span><br><span class="line">            arr[i] = (<span class="keyword">int</span>) (Math.random() * <span class="number">8000000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> l = System.currentTimeMillis();</span><br><span class="line">        quickSort(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> l1 = System.currentTimeMillis();</span><br><span class="line">        System.out.println(l1 - l);</span><br><span class="line"><span class="comment">//        int[] arr  =  &#123;1 ,2 ,3 ,6 ,0 ,4 , 5&#125;;</span></span><br><span class="line"><span class="comment">//        quickSort(arr,0,arr.length-1);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        System.out.println(Arrays.toString(arr));</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = left; <span class="comment">// 左</span></span><br><span class="line">        <span class="keyword">int</span> r = right; <span class="comment">// 右</span></span><br><span class="line">        <span class="keyword">int</span> mid = arr[(left + right) / <span class="number">2</span>];</span><br><span class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123; <span class="comment">// 当两个没有碰面时</span></span><br><span class="line">            <span class="comment">// 左侧的往右跑，右侧的往做跑</span></span><br><span class="line">            <span class="keyword">while</span> (arr[l] &lt; mid) &#123;  <span class="comment">// 如果左边的数大于mid就退出了，就找到了左边的 </span></span><br><span class="line">                                    <span class="comment">//大于mid的值，记录位置</span></span><br><span class="line">                l += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 右侧也开始操作</span></span><br><span class="line">            <span class="keyword">while</span> ((arr[r]) &gt; mid) &#123;  <span class="comment">// 如果右边的数字小于mid也同样退出循环了，</span></span><br><span class="line">                                      <span class="comment">//记录了r的位置</span></span><br><span class="line">                r -= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 当来到这里就说明两边都找到了条件的arr[?] 的数据</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (l &gt;= r) &#123;</span><br><span class="line">                <span class="comment">// 说明两个人碰头了，都到达 mid了</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//让他们交换</span></span><br><span class="line">            temp = arr[l];</span><br><span class="line">            arr[l] = arr[r];</span><br><span class="line">            arr[r] = temp;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (arr[l] == mid) &#123; <span class="comment">// 发现当前数字和mid相等，没必要回去，直接放到右边第一个</span></span><br><span class="line">                r -= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (arr[r] == mid) &#123; <span class="comment">// 发现当前数字和mid相等，没必要回去，直接放到右边第一个</span></span><br><span class="line">                l += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 完成上面的任务之后，mid前是小于mid的，mid后是大于mid的</span></span><br><span class="line">        <span class="comment">// 当l == r 时，会导致栈溢出</span></span><br><span class="line">        <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">            l += <span class="number">1</span>;</span><br><span class="line">            r -= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 然后左边继续递归</span></span><br><span class="line">        <span class="keyword">if</span> (left &lt; r) &#123;</span><br><span class="line">            quickSort(arr, left, r);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 向右边递归</span></span><br><span class="line">        <span class="keyword">if</span> (right &gt; l) &#123;</span><br><span class="line">            quickSort(arr, l, right);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -605,339 +920,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/08/24/2021-8-24/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2021-8-23" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/23/2021-8-23/">2021-8-23(多线程的synchronized锁，和锁升级)</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/23/2021-8-23/" class="archive-article-date">
-  	<time datetime="2021-08-23T04:13:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="2021-08-23（多线程）1-（必做）synchronized关键字有哪些用法？请编码测试每种用法。"><a href="#2021-08-23（多线程）1-（必做）synchronized关键字有哪些用法？请编码测试每种用法。" class="headerlink" title="2021-08-23（多线程）1.（必做）synchronized关键字有哪些用法？请编码测试每种用法。"></a>2021-08-23（多线程）1.（必做）synchronized关键字有哪些用法？请编码测试每种用法。</h2><p>synchronized 主要还是看锁住对象或者是class</p>
-<h2 id="根据下面的描述和代码来了解8锁"><a href="#根据下面的描述和代码来了解8锁" class="headerlink" title="根据下面的描述和代码来了解8锁"></a>根据下面的描述和代码来了解8锁</h2><blockquote>
-<pre><code>   《一》 synchronizedDemo.java
-   《二》synchronizedDemo2.java
-   《三》synchronizedDemo3.java
-   《四》synchronizedDemo4.java
-</code></pre>
-</blockquote>
-        
-          <a class="article-more-a" href="/2021/08/23/2021-8-23/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/23/2021-8-23/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2021-8-22" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/22/2021-8-22/">2021-8-22</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/22/2021-8-22/" class="archive-article-date">
-  	<time datetime="2021-08-22T04:24:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="2021-08-22（多线程）"><a href="#2021-08-22（多线程）" class="headerlink" title="2021-08-22（多线程）"></a>2021-08-22（多线程）</h3><blockquote>
-<ol>
-<li>（必做）现在有3个线程A、B、C，请问，如何在B、C线程中获取到A线程操作共享变量后的结果？（例如共享变量num=0，在A中对其进行 +1操作，要求在线程B和C中获取A线程操作后的结果并打印num的值）（提示：使用Semaphore类）</li>
-</ol>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *   1. 创建一个0 许可证的 信号量</span></span><br><span class="line"><span class="comment"> *   2. 线程A 把共享变量 做++ ，然后release 两个许可证</span></span><br><span class="line"><span class="comment"> *   3.B,C线程acquire 获取许可证并减一</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SemaphoreTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Semaphore semaphore = <span class="keyword">new</span> Semaphore(<span class="number">0</span>); <span class="comment">// 创建一个0 许可证的 信号量</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            num++;</span><br><span class="line">            System.out.println(<span class="string">&quot;A线程操作完了&quot;</span>);</span><br><span class="line">            semaphore.release(<span class="number">2</span>);</span><br><span class="line">        &#125;,<span class="string">&quot;A&quot;</span>).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                semaphore.acquire();</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot;线程获取num ：&quot;</span>+num);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;B&quot;</span>).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                semaphore.acquire();</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot;线程获取num ：&quot;</span>+num);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;C&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol start="2">
-<li>（选做）什么是线程死锁？产生死锁的条件是什么？写一个必定会死锁的例子，并找到破解死锁的办法</li>
-</ol>
-<p>多个线程都占有共享资源，持有其他线程需要的资源，多个线程都在等待其他线程释放需要的资源，就会死锁</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">deathClock</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         Object a = <span class="keyword">new</span> Object();</span><br><span class="line">         Object b = <span class="keyword">new</span> Object();</span><br><span class="line">         <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">             <span class="keyword">synchronized</span> (a)&#123;</span><br><span class="line">                 <span class="keyword">try</span> &#123;</span><br><span class="line">                     TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">                 &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                     e.printStackTrace();</span><br><span class="line">                 &#125;</span><br><span class="line">                 System.out.println(<span class="string">&quot;A操作一&quot;</span>);</span><br><span class="line">                 <span class="keyword">synchronized</span> (b)&#123;</span><br><span class="line">                     <span class="keyword">try</span> &#123;</span><br><span class="line">                         TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">                     &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                         e.printStackTrace();</span><br><span class="line">                     &#125;</span><br><span class="line">                     System.out.println(<span class="string">&quot;A操作二&quot;</span>);</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;,<span class="string">&quot;A&quot;</span>).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (b)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">&quot;B操作一&quot;</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (a)&#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        TimeUnit.SECONDS.sleep(<span class="number">3</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(<span class="string">&quot;B操作二&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;B&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解决方法</p>
-<blockquote>
-<pre><code> 1.按照顺序加锁
- 2.设置等待时间，超时释放锁
- 3. 一次申请所有需要的资源
- 4.死锁探测
-</code></pre>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/22/2021-8-22/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-设计模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(工厂方法模式)</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-08-22T01:51:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="工厂方法模式-pizza店"><a href="#工厂方法模式-pizza店" class="headerlink" title="工厂方法模式(pizza店)"></a>工厂方法模式(pizza店)</h1><p><img src="/2021/08/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E5%9B%BE%E8%A7%A3.png"></p>
-        
-          <a class="article-more-a" href="/2021/08/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="w-2021-8-21" class="article article-type-w  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/21/2021-8-21/">1.i++ 是线程安全的吗 ，2.三个线程轮流打印ABC 10次</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/21/2021-8-21/" class="archive-article-date">
-  	<time datetime="2021-08-21T04:22:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="必做）请问：i-是线程安全的吗？请编码模拟多线程并发操作测试，并贴出测试结果，思考为什么会出现这样的结果。"><a href="#必做）请问：i-是线程安全的吗？请编码模拟多线程并发操作测试，并贴出测试结果，思考为什么会出现这样的结果。" class="headerlink" title="必做）请问：i++ 是线程安全的吗？请编码模拟多线程并发操作测试，并贴出测试结果，思考为什么会出现这样的结果。"></a>必做）请问：i++ 是线程安全的吗？请编码模拟多线程并发操作测试，并贴出测试结果，思考为什么会出现这样的结果。</h3><blockquote>
-<pre><code>   肯定不是啊,i++操作分三条指令操作
-   code
-</code></pre>
-</blockquote>
-        
-          <a class="article-more-a" href="/2021/08/21/2021-8-21/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日常页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/21/2021-8-21/">展开全文 >></a>
         </p>
       
 
