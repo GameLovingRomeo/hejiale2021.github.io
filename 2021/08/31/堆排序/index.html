@@ -8,18 +8,20 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>堆排序 | 罗密欧与猪上树</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="堆排序的基本思想1.将待排序的序列造成一个大顶堆2.此时，整个序列的最大值就是根节点3.然后将其与末尾元素进行交换、，此时末尾就是最大值4.然后将剩余的n-1个元素重新构造成一个对，这样就会得到n个元素的次小值，如此反复执行，就能得到一个有序序列了。 最后就可以看到构建大顶堆的过程中，元素的个数逐渐减少，最后就得到一个有序序列了">
+  <meta name="description" content="堆排序的基本思想">
 <meta property="og:type" content="article">
 <meta property="og:title" content="堆排序">
 <meta property="og:url" content="http://example.com/2021/08/31/%E5%A0%86%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="罗密欧与猪上树">
-<meta property="og:description" content="堆排序的基本思想1.将待排序的序列造成一个大顶堆2.此时，整个序列的最大值就是根节点3.然后将其与末尾元素进行交换、，此时末尾就是最大值4.然后将剩余的n-1个元素重新构造成一个对，这样就会得到n个元素的次小值，如此反复执行，就能得到一个有序序列了。 最后就可以看到构建大顶堆的过程中，元素的个数逐渐减少，最后就得到一个有序序列了">
+<meta property="og:description" content="堆排序的基本思想">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/08/31/%E5%A0%86%E6%8E%92%E5%BA%8F/1.png">
 <meta property="article:published_time" content="2021-08-31T06:06:39.000Z">
-<meta property="article:modified_time" content="2021-09-01T01:22:16.384Z">
+<meta property="article:modified_time" content="2021-09-01T05:57:07.470Z">
 <meta property="article:author" content="H&amp;J&amp;L">
 <meta property="article:tag" content="系统学习页">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/08/31/%E5%A0%86%E6%8E%92%E5%BA%8F/1.png">
   
     <link rel="alternative" href="/atom.xml" title="罗密欧与猪上树" type="application/atom+xml">
   
@@ -181,9 +183,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="堆排序的基本思想"><a href="#堆排序的基本思想" class="headerlink" title="堆排序的基本思想"></a>堆排序的基本思想</h2><p>1.将待排序的序列造成一个大顶堆<br><br>2.此时，整个序列的最大值就是根节点<br><br>3.然后将其与末尾元素进行交换、，此时末尾就是最大值<br><br>4.然后将剩余的n-1个元素重新构造成一个对，这样就会得到n个元素的次小值，如此反复执行，就能得到一个有序序列了。<br></p>
-<p>最后就可以看到构建大顶堆的过程中，元素的个数逐渐减少，最后就得到一个有序序列了</p>
-
+        <h2 id="堆排序的基本思想"><a href="#堆排序的基本思想" class="headerlink" title="堆排序的基本思想"></a>堆排序的基本思想</h2><span id="more"></span>
+<p>1.将待排序的序列造成一个大顶堆<br><br>2.此时，整个序列的最大值就是根节点<br><br>3.然后将其与末尾元素进行交换、，此时末尾就是最大值<br><br>4.然后将剩余的n-1个元素重新构造成一个堆，这样就会得到n个元素的次小值，如此反复执行，就能得到一个有序序列了。<br></p>
+<p>最后就可以看到构建大顶堆的过程中，元素的个数逐渐减少，最后就得到一个有序序列了<br><img src="/2021/08/31/%E5%A0%86%E6%8E%92%E5%BA%8F/1.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  800 0000  要 1713ms， 怎么感觉有点不对劲啊，老师的要4秒，</span></span><br><span class="line"><span class="comment"> *  我看看打出80个数，是不是排了， 没什么问题</span></span><br><span class="line"><span class="comment"> *  [13113, 41720, 465736, 527028, 601031, 723008, 912088, 918030, 1079453, 1426512, 1599551,</span></span><br><span class="line"><span class="comment"> *  1807134, 1965628, 1969181, 2178484, 2244443, 2245804, 2544393, 2587981, 2626744, 2924085,</span></span><br><span class="line"><span class="comment"> *  2951217, 3127595, 3164525, 3204741, 3352749, 3413691, 3435749, 3498058, 3499036, 3643916,</span></span><br><span class="line"><span class="comment"> *  3706120, 3911739, 3916307, 3944692, 4032246, 4209354, 4306709, 4528407, 4628017, 4820871,</span></span><br><span class="line"><span class="comment"> *  4835424, 4913147, 4964663, 5100878, 5302084, 5383203, 5386484, 5435733, 5454705, 5557695,</span></span><br><span class="line"><span class="comment"> *  5576350, 5588426, 5646145, 5696885, 5776325, 5949374, 6006807, 6013135, 6024881, 6135025,</span></span><br><span class="line"><span class="comment"> *  6191917, 6284740, 6296070, 6348734, 6367374, 6425984, 6428934, 6556973, 6658443, 6933333,</span></span><br><span class="line"><span class="comment"> *  7069899, 7086607, 7157917, 7252691, 7286745, 7413308, 7473181, 7521524, 7709309]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeapSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">          <span class="comment">//  int[] arr = &#123;4,6,8,5,9&#125;;</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">8000000</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8000000</span>; i++) &#123;</span><br><span class="line">            arr[i] = (<span class="keyword">int</span>)(Math.random()*<span class="number">8000000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> l = System.currentTimeMillis();</span><br><span class="line">        heapSort(arr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> l1 = System.currentTimeMillis();</span><br><span class="line">        System.out.println(l1-l);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//System.out.println(Arrays.toString(arr));</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 堆排序的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;堆排序&quot;</span>);</span><br><span class="line">        <span class="comment">// 直接循环找非叶子节点进行adjustHeap</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = (arr.length/<span class="number">2</span>-<span class="number">1</span>); k &gt;=<span class="number">0</span> ; k--) &#123;</span><br><span class="line">                adjustHeap(arr,k, arr.length);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 遍历交换</span></span><br><span class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> p = arr.length -<span class="number">1</span>; p &gt;=<span class="number">0</span> ; p--) &#123;</span><br><span class="line">            temp = arr[<span class="number">0</span>];</span><br><span class="line">            arr[<span class="number">0</span>] =arr[p];</span><br><span class="line">            arr[p] = temp;</span><br><span class="line">            adjustHeap(arr,<span class="number">0</span>,p);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将一个数组转化为一个大顶堆</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr 其实这个是数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> i   这是最后一个非叶子节点， 然后我们采取的是从下往上，从左往右的排列</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> length 这个length，在每次一轮结束后减一</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">adjustHeap</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> i,<span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = arr[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k =  (<span class="number">2</span>*i)+<span class="number">1</span>; k &lt; length; k = (<span class="number">2</span>*i)+<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((k+<span class="number">1</span>) &lt; length &amp;&amp; arr[k] &lt; arr[k+<span class="number">1</span>])&#123;</span><br><span class="line">                k++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (k &lt; length &amp;&amp; temp &lt; arr[k])&#123;</span><br><span class="line">                arr[i] = arr[k];</span><br><span class="line">                i = k;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        arr[i] = temp;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
 
       
@@ -270,7 +273,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          2021-8-31
+          2021-8-31 循环删除集合里面的元素，你能写出几种
         
       </div>
     </a>
@@ -354,7 +357,7 @@
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
-		showTags: false
+		showTags: true
 	}
 </script>
 
@@ -475,7 +478,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">study</div>
   	  	
     	</section>
     

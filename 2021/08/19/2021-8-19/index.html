@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>实现多线程方式 | 罗密欧与猪上树</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写出实现多线程的n种方式，编码测试 1.继承Thread类，重写run()2.实现Runnable3.实现Callable，重写call()4.采用线程池">
+  <meta name="description" content="写出实现多线程的n种方式，编码测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实现多线程方式">
 <meta property="og:url" content="http://example.com/2021/08/19/2021-8-19/index.html">
 <meta property="og:site_name" content="罗密欧与猪上树">
-<meta property="og:description" content="写出实现多线程的n种方式，编码测试 1.继承Thread类，重写run()2.实现Runnable3.实现Callable，重写call()4.采用线程池">
+<meta property="og:description" content="写出实现多线程的n种方式，编码测试">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-19T04:47:00.000Z">
-<meta property="article:modified_time" content="2021-08-22T02:36:09.929Z">
+<meta property="article:modified_time" content="2021-09-01T06:11:44.513Z">
 <meta property="article:author" content="H&amp;J&amp;L">
 <meta property="article:tag" content="日常页">
 <meta name="twitter:card" content="summary">
@@ -181,10 +181,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="写出实现多线程的n种方式，编码测试"><a href="#写出实现多线程的n种方式，编码测试" class="headerlink" title="写出实现多线程的n种方式，编码测试"></a>写出实现多线程的n种方式，编码测试</h3><blockquote>
+        <h3 id="写出实现多线程的n种方式，编码测试"><a href="#写出实现多线程的n种方式，编码测试" class="headerlink" title="写出实现多线程的n种方式，编码测试"></a>写出实现多线程的n种方式，编码测试</h3><span id="more"></span>
+<blockquote>
 <p>1.继承Thread类，重写run()<br>2.实现Runnable<br>3.实现Callable，重写call()<br>4.采用线程池</p>
 </blockquote>
-<span id="more"></span>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.Springcloud.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// 线程池的方法</span></span><br><span class="line">        ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">1</span>);</span><br><span class="line">        executorService.execute(()-&gt;&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;线程池的方法&quot;</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        executorService.shutdownNow();</span><br><span class="line">        <span class="comment">// 继承thread的</span></span><br><span class="line">        <span class="keyword">new</span> demo().start();</span><br><span class="line">        <span class="comment">// 实现runnable的</span></span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> demo2()).start();</span><br><span class="line">        <span class="comment">// 实现callable的</span></span><br><span class="line">        FutureTask&lt;Object&gt; task = <span class="keyword">new</span> FutureTask&lt;Object&gt;(<span class="keyword">new</span> demo3());</span><br><span class="line">        <span class="keyword">new</span> Thread(task).start();</span><br><span class="line">        System.out.println(task.get());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">demo</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;thread多线程&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">demo2</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;runnable多线程&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">demo3</span> <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;callable多线程3&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">结果</span><br><span class="line">线程池的方法</span><br><span class="line">thread多线程</span><br><span class="line">runnable多线程</span><br><span class="line">callable多线程<span class="number">3</span></span><br></pre></td></tr></table></figure>
       
 
@@ -356,7 +356,7 @@
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
-		showTags: false
+		showTags: true
 	}
 </script>
 
@@ -477,7 +477,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">study</div>
   	  	
     	</section>
     
