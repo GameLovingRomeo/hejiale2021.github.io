@@ -8,15 +8,32 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Vector | 罗密欧与猪上树</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="vector无参构造jdk15">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Vector">
 <meta property="og:url" content="http://example.com/2021/09/17/Vector/index.html">
 <meta property="og:site_name" content="罗密欧与猪上树">
+<meta property="og:description" content="vector无参构造jdk15">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/1.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/2.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/3.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/4.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/5.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/6.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/7.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/8.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/9.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/10.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/11.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/12.png">
+<meta property="og:image" content="http://example.com/2021/09/17/Vector/13.png">
 <meta property="article:published_time" content="2021-09-17T05:01:19.000Z">
-<meta property="article:modified_time" content="2021-09-17T05:01:19.759Z">
+<meta property="article:modified_time" content="2021-09-18T02:32:49.711Z">
 <meta property="article:author" content="H&amp;J&amp;L">
+<meta property="article:tag" content="集合">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/09/17/Vector/1.png">
   
     <link rel="alternative" href="/atom.xml" title="罗密欧与猪上树" type="application/atom+xml">
   
@@ -178,7 +195,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="vector无参构造jdk15"><a href="#vector无参构造jdk15" class="headerlink" title="vector无参构造jdk15"></a>vector无参构造jdk15</h2><span id="more"></span>
+<blockquote>
+<p><img src="/2021/09/17/Vector/1.png"></p>
+<h2 id="很明显即便你无参构造，他还是会默认调用有参构造，且初始大小为10"><a href="#很明显即便你无参构造，他还是会默认调用有参构造，且初始大小为10" class="headerlink" title="很明显即便你无参构造，他还是会默认调用有参构造，且初始大小为10"></a>很明显即便你无参构造，他还是会默认调用有参构造，且初始大小为10</h2><p><img src="/2021/09/17/Vector/2.png"></p>
+<h2 id="返回一个对象数组大小为10"><a href="#返回一个对象数组大小为10" class="headerlink" title="返回一个对象数组大小为10"></a>返回一个对象数组大小为10</h2><p><img src="/2021/09/17/Vector/3.png"></p>
+<h2 id="接下来就是装箱操作，直接三连，和arraylist的方式差不多，有趣的是jdk8的s-的值是在数组参数位置做自增，和jdk15是在条件判断的时候有一个elementCount做计数，然后赋值给s"><a href="#接下来就是装箱操作，直接三连，和arraylist的方式差不多，有趣的是jdk8的s-的值是在数组参数位置做自增，和jdk15是在条件判断的时候有一个elementCount做计数，然后赋值给s" class="headerlink" title="接下来就是装箱操作，直接三连，和arraylist的方式差不多，有趣的是jdk8的s 的值是在数组参数位置做自增，和jdk15是在条件判断的时候有一个elementCount做计数，然后赋值给s"></a>接下来就是装箱操作，直接三连，和arraylist的方式差不多，有趣的是jdk8的s 的值是在数组参数位置做自增，和jdk15是在条件判断的时候有一个elementCount做计数，然后赋值给s</h2><p><img src="/2021/09/17/Vector/4.png"><br><img src="/2021/09/17/Vector/5.png"><br><img src="/2021/09/17/Vector/6.png"></p>
+</blockquote>
+<blockquote>
+<h2 id="2-直接来到我们的扩容看看是如何操作的"><a href="#2-直接来到我们的扩容看看是如何操作的" class="headerlink" title="2.直接来到我们的扩容看看是如何操作的"></a>2.直接来到我们的扩容看看是如何操作的</h2><p><img src="/2021/09/17/Vector/7.png"> </p>
+<h2 id="很明显，集合长度10不够了，判断符合扩容，进入grow（）方法。"><a href="#很明显，集合长度10不够了，判断符合扩容，进入grow（）方法。" class="headerlink" title="很明显，集合长度10不够了，判断符合扩容，进入grow（）方法。"></a>很明显，集合长度10不够了，判断符合扩容，进入grow（）方法。</h2><p><img src="/2021/09/17/Vector/8.png"></p>
+<h2 id="调用本类的方法-grow-int-minCapacity"><a href="#调用本类的方法-grow-int-minCapacity" class="headerlink" title="调用本类的方法 grow(int minCapacity)"></a>调用本类的方法 grow(int minCapacity)</h2><p><img src="/2021/09/17/Vector/9.png"> </p>
+<h2 id="ps-8和15的区别就是在部分代码上有改变，但是总体逻辑还是没有变化的"><a href="#ps-8和15的区别就是在部分代码上有改变，但是总体逻辑还是没有变化的" class="headerlink" title="ps:8和15的区别就是在部分代码上有改变，但是总体逻辑还是没有变化的"></a>ps:8和15的区别就是在部分代码上有改变，但是总体逻辑还是没有变化的</h2><p><img src="/2021/09/17/Vector/10.png"> </p>
+<h2 id="具体"><a href="#具体" class="headerlink" title="具体"></a>具体</h2><p><img src="/2021/09/17/Vector/11.png"> </p>
+<h2 id="copy集合"><a href="#copy集合" class="headerlink" title="copy集合"></a>copy集合</h2><p><img src="/2021/09/17/Vector/12.png"> </p>
+<h2 id="扩容完成"><a href="#扩容完成" class="headerlink" title="扩容完成"></a>扩容完成</h2><p><img src="/2021/09/17/Vector/13.png"></p>
+</blockquote>
+
       
 
       
@@ -186,6 +219,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -250,6 +294,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2021/09/17/LinkedList/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          LinkedList
+        
+      </div>
+    </a>
+  
   
     <a href="/2021/09/16/LeetCodeStudyDatabase/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">LeetCodeStudyDatabase</div>
@@ -279,7 +332,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vector%E6%97%A0%E5%8F%82%E6%9E%84%E9%80%A0jdk15"><span class="toc-number">1.</span> <span class="toc-text">vector无参构造jdk15</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%88%E6%98%8E%E6%98%BE%E5%8D%B3%E4%BE%BF%E4%BD%A0%E6%97%A0%E5%8F%82%E6%9E%84%E9%80%A0%EF%BC%8C%E4%BB%96%E8%BF%98%E6%98%AF%E4%BC%9A%E9%BB%98%E8%AE%A4%E8%B0%83%E7%94%A8%E6%9C%89%E5%8F%82%E6%9E%84%E9%80%A0%EF%BC%8C%E4%B8%94%E5%88%9D%E5%A7%8B%E5%A4%A7%E5%B0%8F%E4%B8%BA10"><span class="toc-number">2.</span> <span class="toc-text">很明显即便你无参构造，他还是会默认调用有参构造，且初始大小为10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84%E5%A4%A7%E5%B0%8F%E4%B8%BA10"><span class="toc-number">3.</span> <span class="toc-text">返回一个对象数组大小为10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%B0%B1%E6%98%AF%E8%A3%85%E7%AE%B1%E6%93%8D%E4%BD%9C%EF%BC%8C%E7%9B%B4%E6%8E%A5%E4%B8%89%E8%BF%9E%EF%BC%8C%E5%92%8Carraylist%E7%9A%84%E6%96%B9%E5%BC%8F%E5%B7%AE%E4%B8%8D%E5%A4%9A%EF%BC%8C%E6%9C%89%E8%B6%A3%E7%9A%84%E6%98%AFjdk8%E7%9A%84s-%E7%9A%84%E5%80%BC%E6%98%AF%E5%9C%A8%E6%95%B0%E7%BB%84%E5%8F%82%E6%95%B0%E4%BD%8D%E7%BD%AE%E5%81%9A%E8%87%AA%E5%A2%9E%EF%BC%8C%E5%92%8Cjdk15%E6%98%AF%E5%9C%A8%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E7%9A%84%E6%97%B6%E5%80%99%E6%9C%89%E4%B8%80%E4%B8%AAelementCount%E5%81%9A%E8%AE%A1%E6%95%B0%EF%BC%8C%E7%84%B6%E5%90%8E%E8%B5%8B%E5%80%BC%E7%BB%99s"><span class="toc-number">4.</span> <span class="toc-text">接下来就是装箱操作，直接三连，和arraylist的方式差不多，有趣的是jdk8的s 的值是在数组参数位置做自增，和jdk15是在条件判断的时候有一个elementCount做计数，然后赋值给s</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%9B%B4%E6%8E%A5%E6%9D%A5%E5%88%B0%E6%88%91%E4%BB%AC%E7%9A%84%E6%89%A9%E5%AE%B9%E7%9C%8B%E7%9C%8B%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E7%9A%84"><span class="toc-number">5.</span> <span class="toc-text">2.直接来到我们的扩容看看是如何操作的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%88%E6%98%8E%E6%98%BE%EF%BC%8C%E9%9B%86%E5%90%88%E9%95%BF%E5%BA%A610%E4%B8%8D%E5%A4%9F%E4%BA%86%EF%BC%8C%E5%88%A4%E6%96%AD%E7%AC%A6%E5%90%88%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%BF%9B%E5%85%A5grow%EF%BC%88%EF%BC%89%E6%96%B9%E6%B3%95%E3%80%82"><span class="toc-number">6.</span> <span class="toc-text">很明显，集合长度10不够了，判断符合扩容，进入grow（）方法。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E6%9C%AC%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95-grow-int-minCapacity"><span class="toc-number">7.</span> <span class="toc-text">调用本类的方法 grow(int minCapacity)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ps-8%E5%92%8C15%E7%9A%84%E5%8C%BA%E5%88%AB%E5%B0%B1%E6%98%AF%E5%9C%A8%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E4%B8%8A%E6%9C%89%E6%94%B9%E5%8F%98%EF%BC%8C%E4%BD%86%E6%98%AF%E6%80%BB%E4%BD%93%E9%80%BB%E8%BE%91%E8%BF%98%E6%98%AF%E6%B2%A1%E6%9C%89%E5%8F%98%E5%8C%96%E7%9A%84"><span class="toc-number">8.</span> <span class="toc-text">ps:8和15的区别就是在部分代码上有改变，但是总体逻辑还是没有变化的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93"><span class="toc-number">9.</span> <span class="toc-text">具体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#copy%E9%9B%86%E5%90%88"><span class="toc-number">10.</span> <span class="toc-text">copy集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%AE%B9%E5%AE%8C%E6%88%90"><span class="toc-number">11.</span> <span class="toc-text">扩容完成</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -392,6 +445,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">系统学习页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">日常学习页</a>
               </li>
              
               <li class="article-tag-list-item">
